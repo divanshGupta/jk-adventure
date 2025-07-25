@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MapPin, Car, Mountain, Star, Clock, Users } from 'lucide-react';
+import Link from 'next/link';
 
 const Services = () => {
   const services = [
@@ -130,7 +131,9 @@ const Services = () => {
                   View All Services
                 </Button>
                 <Button variant="outline" className="btn-outline-ocean">
-                  Contact Us
+                  <Link href="/contact">
+                    Contact Us
+                  </Link>
                 </Button>
               </div>
             </div>
