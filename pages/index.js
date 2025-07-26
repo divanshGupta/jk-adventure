@@ -1,4 +1,3 @@
-import Gallery from '@/components/gallery';
 import Hero from '@/components/hero';
 import HomeGallerySection from '@/components/homeGallerySection';
 import Reviews from '@/components/reviews';
@@ -6,6 +5,7 @@ import Services from '@/components/services';
 import ContactForm from '@/components/contactForm';
 import React from 'react';
 import Head from 'next/head';
+import Navbar from '@/components/Navbar';
 
 <Head>
   <title>Discover Adventures | Nomad India</title>
@@ -16,6 +16,7 @@ import Head from 'next/head';
 export default function Home() {
   return (
     <>
+      {/* <Navbar /> */}
       <Hero />
       <Services />
       <HomeGallerySection />

@@ -1,6 +1,12 @@
 import { Button } from '@/components/ui/button';
 import { MapPin, Star, Users } from 'lucide-react';
 import Link from 'next/link';
+import { Roboto } from 'next/font/google';
+
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['400', '700'], // Optional: Specify font weights if needed
+});
 
 const Hero = () => {
   return (
@@ -43,30 +49,20 @@ const Hero = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
-            <div className="flex flex-col items-center space-y-2">
-              <div className="flex items-center space-x-2 text-accent">
-                <MapPin className="w-6 h-6" />
-                <span className="text-3xl font-bold">50+</span>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-10">
+            {[
+              { icon: MapPin, label: 'Destinations', value: '50+' },
+              { icon: Star, label: 'Avg Rating', value: '4.9' },
+              { icon: Users, label: 'Happy Travelers', value: '10K+' },
+            ].map(({ icon: Icon, label, value }) => (
+              <div key={label} className="flex flex-col items-center text-white/90">
+                <div className="flex items-center space-x-2 text-accent mb-1">
+                  <Icon className="w-6 h-6" />
+                  <span className="text-2xl font-semibold">{value}</span>
+                </div>
+                <p className="text-sm tracking-wide">{label}</p>
               </div>
-              <p className="text-white/80">Destinations</p>
-            </div>
-            
-            <div className="flex flex-col items-center space-y-2">
-              <div className="flex items-center space-x-2 text-accent">
-                <Star className="w-6 h-6" />
-                <span className="text-3xl font-bold">4.9</span>
-              </div>
-              <p className="text-white/80">Average Rating</p>
-            </div>
-            
-            <div className="flex flex-col items-center space-y-2">
-              <div className="flex items-center space-x-2 text-accent">
-                <Users className="w-6 h-6" />
-                <span className="text-3xl font-bold">10K+</span>
-              </div>
-              <p className="text-white/80">Happy Travelers</p>
-            </div>
+            ))}
           </div>
         </div>
       </div>

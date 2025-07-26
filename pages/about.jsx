@@ -1,4 +1,3 @@
-// components/AboutSection.jsx
 export default function AboutSection() {
   return (
     <section className="pt-24 md:pt-28 w-full md:py-16 px-2 md:px-20 bg-white">

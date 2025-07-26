@@ -1,43 +1,129 @@
-//filter and modals in next version
+import Image from 'next/image';
 import { useState } from 'react';
 
 const galleryImages = [
-  '/images/gallery1.jpg', '/images/gallery2.jpg', '/images/gallery3.jpg',
-  '/images/gallery4.jpg', '/images/gallery5.jpg', '/images/gallery6.jpg',
-  '/images/gallery7.jpg', '/images/gallery8.jpg', '/images/gallery9.jpg'
+  {
+    src: '/gallery/img1.jpg',
+    alt: 'Trekking in Munsiyari',
+    location: 'Munsiyari, Uttarakhand',
+    description: 'A peaceful mountain trail surrounded by snow-capped peaks.',
+    category: 'Mountains',
+  },
+  {
+    src: '/gallery/img2.jpg',
+    alt: 'Sunset at Gokarna Beach',
+    location: 'Gokarna, Karnataka',
+    description: 'Golden sunset on a quiet beach, perfect for yoga and calm.',
+    category: 'Beach',
+  },
+  {
+    src: '/gallery/img1.jpg',
+    alt: 'Trekking in Munsiyari',
+    location: 'Munsiyari, Uttarakhand',
+    description: 'A peaceful mountain trail surrounded by snow-capped peaks.',
+    category: 'Mountains',
+  },
+  {
+    src: '/gallery/img2.jpg',
+    alt: 'Sunset at Gokarna Beach',
+    location: 'Gokarna, Karnataka',
+    description: 'Golden sunset on a quiet beach, perfect for yoga and calm.',
+    category: 'Beach',
+  },
+  {
+    src: '/gallery/img1.jpg',
+    alt: 'Trekking in Munsiyari',
+    location: 'Munsiyari, Uttarakhand',
+    description: 'A peaceful mountain trail surrounded by snow-capped peaks.',
+    category: 'Mountains',
+  },
+  {
+    src: '/gallery/img2.jpg',
+    alt: 'Sunset at Gokarna Beach',
+    location: 'Gokarna, Karnataka',
+    description: 'Golden sunset on a quiet beach, perfect for yoga and calm.',
+    category: 'Beach',
+  },
+  {
+    src: '/gallery/img1.jpg',
+    alt: 'Trekking in Munsiyari',
+    location: 'Munsiyari, Uttarakhand',
+    description: 'A peaceful mountain trail surrounded by snow-capped peaks.',
+    category: 'Mountains',
+  },
+  {
+    src: '/gallery/img2.jpg',
+    alt: 'Sunset at Gokarna Beach',
+    location: 'Gokarna, Karnataka',
+    description: 'Golden sunset on a quiet beach, perfect for yoga and calm.',
+    category: 'Beach',
+  },
+  // Add more images...
 ];
 
-export default function GalleryPage() {
+export default function GallerySection() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   return (
-    <div className="px-4 py-8 bg-white">
-      <h1 className="text-3xl font-bold text-center mb-6">Gallery</h1>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-        {galleryImages.map((src, index) => (
-          <img
-            key={index}
-            src={src}
-            alt={`Gallery ${index + 1}`}
-            onClick={() => setSelectedImage(src)}
-            className="cursor-pointer rounded-lg shadow hover:scale-105 transition-transform duration-300 object-cover w-full h-48"
-          />
-        ))}
-      </div>
+    <section className="bg-gradient-to-b from-white to-gray-50 py-20 px-6 md:px-12" id="gallery">
+      <div className="max-w-6xl mx-auto text-center">
+        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-primary">Gallery</h2>
+        <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-12">
+          Experience glimpses of breathtaking landscapes, vibrant cultures, and unforgettable journeys from our travelers.
+        </p>
 
-      {selectedImage && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
-          <div className="relative">
-            <button
-              className="absolute top-2 right-2 text-white text-xl bg-red-500 rounded-full w-8 h-8 flex items-center justify-center"
-              onClick={() => setSelectedImage(null)}
+        {/* Image Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {galleryImages.map((img, idx) => (
+            <div
+              key={idx}
+              className="relative group cursor-pointer overflow-hidden rounded-2xl shadow hover:shadow-xl transition"
+              onClick={() => setSelectedImage(img)}
             >
-              ×
-            </button>
-            <img src={selectedImage} alt="Selected" className="max-h-[80vh] rounded-lg" />
-          </div>
+              <Image
+                src={img.src}
+                alt={img.alt}
+                width={500}
+                height={350}
+                className="object-cover w-full h-full transform group-hover:scale-105 transition duration-300"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition" />
+            </div>
+          ))}
         </div>
-      )}
-    </div>
+
+        {/* Modal */}
+        {selectedImage && (
+          <div
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50"
+            onClick={() => setSelectedImage(null)}
+          >
+            <div className="relative max-w-4xl w-full p-4">
+              <Image
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                width={1200}
+                height={800}
+                className="rounded-lg object-contain mx-auto max-h-[90vh]"
+              />
+              {/* 💤 Hidden Info - for future use */}
+              {/* 
+              <div className="mt-4 text-white text-center">
+                <h3 className="text-xl font-semibold">{selectedImage.location}</h3>
+                <p className="text-white/80 mt-2">{selectedImage.description}</p>
+              </div>
+              */}
+
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="absolute top-4 right-4 text-white text-3xl font-bold"
+              >
+                &times;
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }

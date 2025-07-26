@@ -16,7 +16,7 @@ const Navbar = () => {
     if (!isHomePage) return;
 
     const handleScroll = () => {
-      setScrolled(window.scrollY > 100);
+      setScrolled(window.scrollY > 200);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -24,23 +24,19 @@ const Navbar = () => {
   }, [isHomePage]);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
+    // { name: 'Home', path: '/' },
     { name: 'Tour Packages', path: '/tours' },
     { name: 'Taxi Service', path: '/taxi' },
     { name: 'Adventure Sports', path: '/adventure' },
-    { name: 'Gallery', path: '/gallery' },
-    { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' },
+    // { name: 'Gallery', path: '/gallery' },
+    // { name: 'About', path: '/about' },
+    // { name: 'Contact', path: '/contact' },
   ];
 
   return (
-    <nav className={`w-full fixed top-0 left-0 z-50 ${
-      isHomePage
-        ? scrolled
-          ? "bg-white shadow-md"
-          : "bg-transparent"
-          : "bg-white shadow-md"
-      }`}>
+    <nav className={`fixed top-1 md:top-2 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300
+              
+              ${scrolled ? 'backdrop-blur-md bg-white/30 w-[80%] rounded-2xl py-2 shadow-lg' : 'w-full rounded-none py-4'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
@@ -67,16 +63,18 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <Button className="btn-hero">
-              Book Now
-            </Button>
+
           </div>
+
+          <Button className="hidden md:block btn-hero">
+              Book Now
+          </Button>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-foreground hover:text-primary transition-colors"
+              className="text-foreground hover:text-primary transition-colors "
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -99,7 +97,7 @@ const Navbar = () => {
               ))}
               <div className="px-3 py-2">
                 <Button className="btn-hero w-full">
-                  Book Now
+                    Book Now
                 </Button>
               </div>
             </div>
