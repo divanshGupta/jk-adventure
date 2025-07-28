@@ -2,3 +2,26 @@
 - [ ] Add filter tabs (Beach, Mountain, Culture)
 - [ ] Animate modal using Framer Motion
 - [ ] Add full lightbox functionality (next/prev)
+
+
+✅ Modern Alternatives to Show 3 Service Categories
+❤️Option 1: Interactive Horizontal Tabs or Segmented Control
+Display all 3 categories as horizontal tabs (like buttons).
+On click, show a set of preview cards (2-3 per category) without navigating away.
+Below the cards: a “View All” button that routes to the full page.
+
+Why it’s better:
+Keeps user on the homepage longer.
+Encourages exploration.
+
+More dynamic feel.
+❤️Option 2: Full-width Hero-style Service Blocks (Stacked)
+Instead of 3 cards side-by-side, create stacked service sections with:
+A background image or light colored block
+Brief info about the service
+1-2 featured offerings from that category (with images/pricing)
+CTA button: "Explore Tour Packages"
+
+Why it's better:
+More room for storytelling and visuals
+Engages visitors as they scroll

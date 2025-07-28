@@ -27,10 +27,10 @@ const ContactForm = () => {
       className="flex flex-col gap-4 bg-white p-6 rounded-lg shadow-md max-w-xl w-full"
       aria-label="Contact Form"
     >
-      <div className="text-center">
+      {/* <div className="text-center">
         <h2 className="text-xl font-semibold">Kashmir Retreat | Romantic Escape To Doodhpathri</h2>
         <p className="text-lg font-bold text-green-600 mt-1">INR 20,000 <span className="line-through text-gray-500 text-sm ml-2">INR 28,986</span> <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm ml-2">SAVE INR 8,986</span></p>
-      </div>
+      </div> */}
 
       <input
         type="text"

@@ -17,42 +17,42 @@ const galleryImages = [
     category: 'Beach',
   },
   {
-    src: '/gallery/img1.jpg',
+    src: '/gallery/img3.jpg',
     alt: 'Trekking in Munsiyari',
     location: 'Munsiyari, Uttarakhand',
     description: 'A peaceful mountain trail surrounded by snow-capped peaks.',
     category: 'Mountains',
   },
   {
-    src: '/gallery/img2.jpg',
+    src: '/gallery/img4.jpg',
     alt: 'Sunset at Gokarna Beach',
     location: 'Gokarna, Karnataka',
     description: 'Golden sunset on a quiet beach, perfect for yoga and calm.',
     category: 'Beach',
   },
   {
-    src: '/gallery/img1.jpg',
+    src: '/gallery/img5.jpg',
     alt: 'Trekking in Munsiyari',
     location: 'Munsiyari, Uttarakhand',
     description: 'A peaceful mountain trail surrounded by snow-capped peaks.',
     category: 'Mountains',
   },
   {
-    src: '/gallery/img2.jpg',
+    src: '/gallery/img6.jpg',
     alt: 'Sunset at Gokarna Beach',
     location: 'Gokarna, Karnataka',
     description: 'Golden sunset on a quiet beach, perfect for yoga and calm.',
     category: 'Beach',
   },
   {
-    src: '/gallery/img1.jpg',
+    src: '/gallery/img7.jpg',
     alt: 'Trekking in Munsiyari',
     location: 'Munsiyari, Uttarakhand',
     description: 'A peaceful mountain trail surrounded by snow-capped peaks.',
     category: 'Mountains',
   },
   {
-    src: '/gallery/img2.jpg',
+    src: '/gallery/img8.jpg',
     alt: 'Sunset at Gokarna Beach',
     location: 'Gokarna, Karnataka',
     description: 'Golden sunset on a quiet beach, perfect for yoga and calm.',
@@ -65,15 +65,15 @@ export default function GallerySection() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   return (
-    <section className="bg-gradient-to-b from-white to-gray-50 py-20 px-6 md:px-12" id="gallery">
-      <div className="max-w-6xl mx-auto text-center">
+    <section className=" w-[90%] md:w-[80%] mx-auto mt-20 " id="gallery">
+      <div className="max-full mx-auto text-center ">
         <h2 className="text-4xl md:text-5xl font-bold mb-4 text-primary">Gallery</h2>
         <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-12">
           Experience glimpses of breathtaking landscapes, vibrant cultures, and unforgettable journeys from our travelers.
         </p>
 
         {/* Image Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-4 ">
           {galleryImages.map((img, idx) => (
             <div
               key={idx}

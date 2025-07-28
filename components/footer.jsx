@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="space-y-6">
             <div className="flex items-center space-x-2">
               <Compass className="w-8 h-8 text-accent" />
-              <span className="text-2xl font-bold">The Nomad Indian</span>
+              <span className="text-2xl font-bold">JK Adventure</span>
             </div>
             <p className="text-white/80 leading-relaxed">
               Your trusted partner for unforgettable travel experiences. We create memories that last a lifetime 
@@ -41,9 +41,9 @@ const Footer = () => {
             <ul className="space-y-3">
               {[
                 { name: 'Home', path: '/' },
-                { name: 'Tour Packages', path: '/tours' },
-                { name: 'Taxi Service', path: '/taxi' },
-                { name: 'Adventure Sports', path: '/adventure' },
+                { name: 'Tour Packages', path: '/services' },
+                { name: 'Taxi Service', path: '/services' },
+                { name: 'Adventure Sports', path: '/services' },
                 { name: 'Gallery', path: '/gallery' },
                 { name: 'About Us', path: '/about' },
               ].map((link) => (
@@ -96,7 +96,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-accent" />
-                <span className="text-white/80">info@thenomadindia.com</span>
+                <span className="text-white/80">info@jkadventure.com</span>
               </div>
             </div>
             
@@ -123,7 +123,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-white/60 text-sm">
-            © {currentYear} The Nomad India. All rights reserved.
+            © {currentYear} JK Adventure. All rights reserved.
           </p>
           <div className="flex space-x-6 text-sm">
             <Link href="/privacy" className="text-white/60 hover:text-white transition-colors">

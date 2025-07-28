@@ -10,10 +10,10 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const Router = useRouter();
-  const isHomePage = Router.pathname === "/";
+  // const isHomePage = Router.pathname === "/";
 
     useEffect(() => {
-    if (!isHomePage) return;
+    // if (!isHomePage) return;
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 200);
@@ -21,22 +21,27 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomePage]);
+  }, []);
 
   const navLinks = [
-    // { name: 'Home', path: '/' },
-    { name: 'Tour Packages', path: '/tours' },
-    { name: 'Taxi Service', path: '/taxi' },
-    { name: 'Adventure Sports', path: '/adventure' },
-    // { name: 'Gallery', path: '/gallery' },
-    // { name: 'About', path: '/about' },
-    // { name: 'Contact', path: '/contact' },
+    { name: 'Home', path: '/' },
+    { name: 'Tour Packages', path: '/services' },
+    { name: 'Taxi Service', path: '/services' },
+    { name: 'Adventure Sports', path: '/services' },
+    { name: 'Gallery', path: '/gallery' },
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' },
+  ];
+  const desktopNavLinks = [
+    { name: 'Tour Packages', path: '/services' },
+    { name: 'Taxi Service', path: '/services' },
+    { name: 'Adventure Sports', path: '/services' },
+    
   ];
 
   return (
     <nav className={`fixed top-1 md:top-2 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300
-              
-              ${scrolled ? 'backdrop-blur-md bg-white/30 w-[80%] rounded-2xl py-2 shadow-lg' : 'w-full rounded-none py-4'}`}>
+              ${scrolled ? 'backdrop-blur-md bg-white/30 w-[90%] md:w-[80%] rounded-2xl py-1 md:py-2 shadow-lg' : 'w-full rounded-none py-1 md:py-2'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
@@ -47,14 +52,14 @@ const Navbar = () => {
                 height={40}
             /> */}
             <span className="text-2xl font-bold bg-clip-text">
-              The Nomad Indian
+              JK Adventure
             </span>
 
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
+            {desktopNavLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.path}
