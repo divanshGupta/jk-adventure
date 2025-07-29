@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 const CTA = () => {
     return (
-        <div className="text-center m-4">
+        <div className="text-center my-12">
           <div className="bg-white rounded-2xl shadow-medium p-8 max-w-4xl mx-auto">
             <div className="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
               <div className="text-left">

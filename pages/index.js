@@ -7,7 +7,7 @@ import Head from 'next/head';
 
 import CTA from '@/components/CTA';
 import ServiceSection from '@/components/ServiceSection';
-import ServicesSection2 from '@/components/ServiceSection2';
+
 
 
 <Head>
@@ -30,16 +30,18 @@ export default function Home() {
         bgImage="/tour-bg.jpg"
         plans={[
           {
-            image: '/gallery/img1.jpg',
+            images: ['/gallery/img1.jpg', '/gallery/img3.jpg', '/gallery/img4.jpg'],
             title: 'Jammu Kashmir Getaway',
             time: '6 Days 5 Nights',
             price: '2999',
+            discountedPrice: '2499',
           },
           {
-            image: '/gallery/img2.jpg',
+            images: ['/gallery/img2.jpg'],
             title: 'Pahalgam Adventure',
             time: '5 Days 4 Nights',
             price: '5999',
+            discountedPrice: '4999',
           },
         ]}
         ctaLink="/services"
@@ -54,14 +56,18 @@ export default function Home() {
         bgImage="/adv-bg2.jpg"
         plans={[
           {
-            image: '/gallery/adventure1.jpg',
+            images: ['/gallery/adventure1.jpg'],
             title: 'Paragliding - Pahalgam',
             details: 'Half Day • From ₹1,200',
+            price: '2999',
+            discountedPrice: '2499',
           },
           {
-            image: '/gallery/adventure2.jpg',
+            images: ['/gallery/adventure2.jpg'],
             title: 'River Rafting - Sonmarg',
             details: '20 min flight • ₹2,500',
+            price: '2999',
+            discountedPrice: '2499',
           },
         ]}
         ctaLink="/services"
@@ -76,14 +82,18 @@ export default function Home() {
         bgImage="/taxi-bg.jpg"
         plans={[
           {
-            image: '/gallery/taxi1.jpg',
+            images: ['/gallery/taxi1.jpg'],
             title: 'Srinagar to Katra Sedan',
             details: 'One-way • From ₹3,500',
+            price: '2999',
+            discountedPrice: '2499',
           },
           {
-            image: '/gallery/taxi2.jpg',
+            images: ['/gallery/taxi2.jpg'],
             title: 'Airport Pickup - Jammu',
             details: 'Local cab • From ₹800',
+            price: '2999',
+            discountedPrice: '2499',
           },
         ]}
         ctaLink="/services"

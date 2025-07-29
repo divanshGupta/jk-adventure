@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 const Reviews = () => {
 
     const scrollContainerRef = useRef(null);
-  const cardRef = useRef(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+    const cardRef = useRef(null);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const reviews = [
         {id: 1, name: "Alice Johnson", location: "New York, NY", text: "Amazing service! Highly recommend.", rating: 5, image: "/images/alice.jpg"},
@@ -43,7 +43,7 @@ const Reviews = () => {
     scrollToIndex(newIndex);
   };
     return (
-        <div className="relative w-full overflow-hidden py-8">
+        <div className="w-[90%] md:w-[80%] mx-auto relative overflow-hidden py-8">
 
             <button
                 onClick={() => handleScroll("left")}

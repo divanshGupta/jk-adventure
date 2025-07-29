@@ -62,7 +62,7 @@ const sampleImages = [
 
 export default function HomeGallerySection() {
   return (
-    <section className="px-4 py-8 bg-white">
+    <section className="mx-auto w-[90%] md:w-[80%] px-4 py-8 ">
       <h2 className="text-2xl font-bold text-center mb-2">Explore Our Gallery</h2>
       <p className="text-center text-gray-600 mb-6">A glimpse of memories from our travel experiences</p>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">

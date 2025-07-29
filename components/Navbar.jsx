@@ -51,7 +51,7 @@ const Navbar = () => {
                 width={40}
                 height={40}
             /> */}
-            <span className="text-2xl font-bold bg-clip-text">
+            <span className="text-2xl font-bold bg-clip-text bg-yellow-300 text-black px-4 py-2">
               JK Adventure
             </span>
 
