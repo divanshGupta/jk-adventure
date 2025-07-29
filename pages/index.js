@@ -43,6 +43,13 @@ export default function Home() {
             price: '5999',
             discountedPrice: '4999',
           },
+          {
+            images: ['/gallery/img7.jpg'],
+            title: 'Srinagar Heritage Tour',
+            time: '7 Days 7 Nights',
+            price: '8999',
+            discountedPrice: '6499',
+          },
         ]}
         ctaLink="/services"
         ctaText="See All Tours →"
