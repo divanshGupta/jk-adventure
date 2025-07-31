@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { FaPhoneAlt } from 'react-icons/fa';
-import ImageCarousel from './imageCarousel';
+import ImageCarousel from './ImageCarousel';
 
 const PlanCard = ({ plan }) => {
 
@@ -20,12 +20,12 @@ const PlanCard = ({ plan }) => {
       <div className="flex flex-col justify-between h-[230px] p-4">
         <div className="space-y-1 mb-2">
           <h3 className="text-xl font-semibold text-black">{plan.title}</h3>
-          <p className="text-base text-gray-700">{plan.time}</p>
+          <p className="text-base text-black font-normal">{plan.time}</p>
 
           {/* 💸 Price Info */}
           <div className="mt-2">
             <div className="flex items-center gap-2">
-              <p className="text-sm line-through text-gray-500">INR {plan.price}</p>
+              <p className="text-sm line-through text-black font-light">INR {plan.price}</p>
               <span className="text-[11px] bg-orange-100 px-2 py-0.5 text-orange-500 font-bold rounded">
                 SAVE INR {plan.price - plan.discountedPrice}
               </span>
