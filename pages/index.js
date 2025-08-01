@@ -1,5 +1,5 @@
-import Hero from '@/components/Hero';
-import Reviews from '@/components/Reviews';
+import Hero from '@/components/Hero_temp';
+import Reviews from '@/components/Reviews_temp';
 import Services from '@/pages/services';
 import React from 'react';
 import Head from 'next/head';
