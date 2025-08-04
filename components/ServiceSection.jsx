@@ -1,19 +1,13 @@
 import React from 'react';
 import { Phone } from 'lucide-react';
 import PlanCard from './PlanCard';
+import { allServices } from '@/lib/dummyPackages';
 
-const ServiceSection = ({
-  id,
-  title,
-  description,
-  bgImage,
-  plans = [],
-  ctaLink,
-  ctaText,
-}) => {
+const { tours } = allServices;
+
+const ServiceSection = ( { bgImage, title, description, ctaLink, ctaText }) => {
   return (
     <section
-      id={id}
       className="relative w-[100%] mx-auto min-h-screen flex items-center justify-center text-white mb-4 shadow hover:shadow-xl transition"
     >
       <img
@@ -39,8 +33,7 @@ const ServiceSection = ({
         </div>
 
         <div className="md:w-2/3 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mb-6">
-          {plans.map((plan, index) => (
-            
+          {tours.map((plan, index) => (            
             <PlanCard key={index} plan={plan} />
           ))}
         </div>

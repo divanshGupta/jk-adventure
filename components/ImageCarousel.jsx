@@ -1,98 +1,63 @@
-import React, { useState, useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import Image from "next/image";
+import { useState } from "react";
 
-const ImageCarousel = ({ images = [], height = '230px' }) => {
-  const validImages = Array.isArray(images) && images.length > 0
-    ? images
-    : ['/gallery/default.jpg'];
-
+const ImageCarousel = ({ images = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const touchStartX = useRef(null);
-  const touchEndX = useRef(null);
-  const [direction, setDirection] = useState(0);
 
-  const nextImage = () => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % validImages.length);
+  if (!images || images.length === 0) {
+    return (
+      <div className="w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500 rounded">
+        No image available
+      </div>
+    );
+  }
+
+  // ✅ Single image case
+  if (images.length === 1) {
+    return (
+      <div className="relative w-full h-64 rounded overflow-hidden">
+        <Image
+          src={images[0]}
+          alt="Package"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+    );
+  }
+
+  // ✅ Multiple images
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
-  const prevImage = () => {
-    setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + validImages.length) % validImages.length);
-  };
-
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.changedTouches[0].clientX;
-  };
-
-  const handleTouchEnd = (e) => {
-    touchEndX.current = e.changedTouches[0].clientX;
-    handleSwipe();
-  };
-
-  const handleSwipe = () => {
-    if (!touchStartX.current || !touchEndX.current) return;
-    const diff = touchStartX.current - touchEndX.current;
-    if (diff > 50) nextImage();
-    else if (diff < -50) prevImage();
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
   return (
-    <div
-      className="relative w-full overflow-hidden rounded-lg"
-      style={{ height }}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-    >
-      <AnimatePresence initial={false} custom={direction}>
-        <motion.img
-          key={currentIndex}
-          src={validImages[currentIndex]}
-          alt={`Slide ${currentIndex}`}
-          loading="lazy"
-          custom={direction}
-          initial={{ x: direction > 0 ? 200 : -200, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: direction > 0 ? -200 : 200, opacity: 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="absolute w-full h-full object-cover"
-        />
-      </AnimatePresence>
+    <div className="relative w-full h-64 rounded overflow-hidden">
+      <Image
+        src={images[currentIndex]}
+        alt={`Image ${currentIndex + 1}`}
+        fill
+        className="object-cover transition-opacity duration-300"
+        priority
+      />
 
-      {validImages.length > 1 && (
-        <>
-          {/* Arrows */}
-          <button
-            onClick={prevImage}
-            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white p-1 rounded-full hover:bg-black/60 z-10"
-          >
-            <ChevronLeft size={20} />
-          </button>
-          <button
-            onClick={nextImage}
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white p-1 rounded-full hover:bg-black/60 z-10"
-          >
-            <ChevronRight size={20} />
-          </button>
-
-          {/* Dots */}
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 z-10">
-            {validImages.map((_, index) => (
-              <div
-                key={index}
-                onClick={() => {
-                  setDirection(index > currentIndex ? 1 : -1);
-                  setCurrentIndex(index);
-                }}
-                className={`h-2 w-2 rounded-full cursor-pointer transition-all duration-200 ${
-                  currentIndex === index ? 'bg-white' : 'bg-white/50'
-                }`}
-              />
-            ))}
-          </div>
-        </>
-      )}
+      <button
+        onClick={(e) => {e.stopPropagation(); prevSlide();}}
+        className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white/70 px-2 py-1 rounded-full text-xl z-10"
+      >
+        ‹
+      </button>
+      <button
+        onClick={(e) => {e.stopPropagation(); nextSlide();}}
+        className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white/70 px-2 py-1 rounded-full text-xl z-10"
+      >
+        ›
+      </button>
     </div>
   );
 };

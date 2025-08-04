@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from "next/router";
 import { FaMotorcycle, FaTaxi, FaHiking, FaMapMarkedAlt } from "react-icons/fa";
 
@@ -6,22 +7,22 @@ const services = [
   {
     title: "Tour Packages",
     icon: <FaMapMarkedAlt size={28} />,
-    route: "/services/services",
+    route: "/tours/",
   },
   {
     title: "Adventure Activities",
     icon: <FaHiking size={28} />,
-    route: "/services/adventure-activities",
+    route: "/adventures/",
   },
   {
     title: "Bike Rentals",
     icon: <FaMotorcycle size={28} />,
-    route: "/services/bike-rentals",
+    route: "/bikes/",
   },
   {
     title: "Taxi Booking",
     icon: <FaTaxi size={28} />,
-    route: "/services/taxi-booking",
+    route: "/taxis/",
   },
   // To add more, just add another object here
 ];
@@ -57,14 +58,14 @@ export default function HeroSection() {
         {/* Menu Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {services.map((service, idx) => (
-            <div
-              key={idx}
-              onClick={() => router.push(service.route)}
-              className="bg-white/40 backdrop-blur-md rounded-xl shadow-md p-6 md:p-10 flex flex-col items-center justify-center text-gray-800 hover:scale-105 transition cursor-pointer"
-            >
-              <div className="mb-2">{service.icon}</div>
-              <p className="text-center font-semibold">{service.title}</p>
-            </div>
+            <Link href={service.route} key={idx}>
+              <div
+                className="bg-white/40 backdrop-blur-md rounded-xl shadow-md p-6 md:p-10 flex flex-col items-center justify-center text-gray-800 hover:scale-105 transition cursor-pointer"
+              >
+                <div className="mb-2">{service.icon}</div>
+                <p className="text-center font-semibold">{service.title}</p>
+              </div>
+            </Link>
           ))}
         </div>
 

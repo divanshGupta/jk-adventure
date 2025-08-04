@@ -26,7 +26,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Profile', path: '/profile' },
-    { name: 'Tour Packages', path: '/services' },
+    { name: 'Tour Packages', path: '/tour-packages/' },
     { name: 'Taxi Service', path: '/services' },
     { name: 'Adventure Sports', path: '/services' },
     { name: 'Gallery', path: '/gallery' },
@@ -35,7 +35,7 @@ const Navbar = () => {
     { name: 'Blog', path: '/Blog' },
   ];
   const desktopNavLinks = [
-    { name: 'Services', path: '/services' },
+    { name: 'Services', path: '/tour-packages/[slug]' },
     { name: 'About', path: '/about' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'Contact', path: '/contact' },
