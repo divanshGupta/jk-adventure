@@ -1,8 +1,9 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, CircleUser } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import ProfileMenu from './ui/profile-dropdown';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +11,7 @@ const Navbar = () => {
 
     useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 100);
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -28,6 +29,7 @@ const Navbar = () => {
     { name: 'About Us', path: '/about' },
     { name: 'Contact Us', path: '/contact' },
     { name: 'Blog', path: '/Blog' },
+    { name: 'Log In', path: '/auth/login' },
   ];
   const desktopNavLinks = [
     { name: 'Services', path: '/tours' },
@@ -38,9 +40,9 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed top-0 left-0 transform z-50 transition-all duration-300
-              ${scrolled ? 'bg-slate-50 w-full md:py-2 md:px-32 mx-auto py-1 shadow-lg' : 'w-full rounded-none py-1 md:py-2'}`}>
-      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
+              ${scrolled ? 'bg-slate-50 w-full md:py-2 md:px-12 py-1 shadow-lg' : 'w-full rounded-none py-1 md:py-2'}`}>
+      <div className="w-full mx-auto">
+        <div className="flex justify-between items-center py-4 px-6 md:px-40">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             {/* <Image src="/logo.jpg"
@@ -68,7 +70,7 @@ const Navbar = () => {
           </div>
 
           <button className="hidden md:block" >
-              <CircleUser size={30}/>
+              <ProfileMenu />
           </button>
 
           {/* Mobile Menu Button */}
