@@ -34,7 +34,7 @@ export default function HeroSection() {
     <section className="relative w-full min-h-screen flex items-center justify-center bg-center bg-cover">
       {/* Optimized Background Image */}
       <Image
-        src="/images/hero/kashmir-bhadarva.jpg" // Ensure this is optimized: 1600px width max
+        src="/images/hero/kashmir-bhadarva-2.jpg" // Ensure this is optimized: 1600px width max
         alt="Mountain Background"
         layout="fill"
         objectFit="cover"
