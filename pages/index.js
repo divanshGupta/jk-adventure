@@ -4,7 +4,7 @@ import React from 'react';
 import Head from 'next/head';
 import CTA from '@/components/CTA';
 import ServiceSection from '@/components/ServiceSection';
-import CallButton from '@/components/CallButton';
+import CallButton from '@/components/ui/CallButton';
 import KashmirIntro from '@/components/KashmirIntro';
 
 <Head>

@@ -31,18 +31,28 @@ const Navbar = () => {
     { name: 'Blog', path: '/Blog' },
     { name: 'Log In', path: '/auth/login' },
   ];
+
   const desktopNavLinks = [
-    { name: 'Services', path: '/tours' },
-    { name: 'About', path: '/about' },
-    { name: 'Gallery', path: '/gallery' },
-    { name: 'Contact', path: '/contact' },
+  {
+    name: 'Services',
+    submenu: [
+      { name: 'Tour Packages', path: '/tours' },
+      { name: 'Taxi Service', path: '/taxis' },
+      { name: 'Adventure Sports', path: '/adventures' },
+      { name: 'Bike Rental', path: '/bikes' },
+    ],
+  },
+  { name: 'About', path: '/about' },
+  { name: 'Gallery', path: '/gallery' },
+  { name: 'Contact', path: '/contact' },
   ];
+
 
   return (
     <nav className={`fixed top-0 left-0 transform z-50 transition-all duration-300
-              ${scrolled ? 'bg-slate-50 w-full md:py-2 md:px-12 py-1 shadow-lg' : 'w-full rounded-none py-1 md:py-2'}`}>
+              ${scrolled ? 'bg-slate-50 w-full md:px-12 shadow-lg' : 'w-full rounded-none'}`}>
       <div className="w-full mx-auto">
-        <div className="flex justify-between items-center py-4 px-6 md:px-40">
+        <div className="flex justify-between items-center py-3 px-6 md:px-40">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             {/* <Image src="/logo.jpg"
@@ -58,13 +68,33 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {desktopNavLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.path}
-                className="hover:text-primary transition-colors duration-300 text-lg font-medium"
-              >
-                {link.name}
-              </Link>
+              link.submenu ? (
+                <div key={link.name} className="relative group">
+                  <button className="hover:text-primary transition-colors duration-300 text-lg font-medium">
+                    {link.name}
+                  </button>
+
+                  <div className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 shadow-lg rounded-md text-sm overflow-hidden font-medium z-50 opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200">
+                    {link.submenu.map((sublink) => (
+                      <Link
+                        key={sublink.name}
+                        href={sublink.path}
+                        className="block px-4 py-3 hover:bg-gray-50 transition-colors hover:rounded-md"
+                      >
+                        {sublink.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={link.name}
+                  href={link.path}
+                  className="hover:text-primary transition-colors duration-300 text-lg font-medium"
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
 
           </div>
