@@ -15,13 +15,15 @@ export default function App({ Component, pageProps }) {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN') {
-        // only redirect to /profile if you're currently on /login
-        if (router.pathname === '/login') {
+        if (router.pathname.startsWith('/auth')) {
           router.push('/profile');
         }
       }
+
       if (event === 'SIGNED_OUT') {
-        router.push('/login');
+        if (!router.pathname.startsWith('/auth')) {
+          router.push('/auth/login');
+        }
       }
     });
 

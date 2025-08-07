@@ -1,13 +1,18 @@
 import { useRouter } from "next/router";
 import withAuth from "@/lib/withAuth";
+import React, { useState } from "react";
 
-const ProfileDashboard = () => {
+const ProfileDashboard = ({ session }) => {
   const router = useRouter();
+  const [name, setName] = useState('');
 
   return (
     <div className="flex items-center justify-center min-h-screen p-6 md:p-12">
       <div>
-        <h1 className="text-3xl font-bold mb-6">Welcome to Your Profile</h1>
+        <div className="p-4">
+          <h1 className="text-xl font-bold">Profile</h1>
+          <p>Logged in as: <strong>{session?.user?.email}</strong></p>
+        </div>
         <div className="space-y-4">
           <p>Manage your bookings, settings, and more.</p>
           <div className="flex flex-col md:flex-row gap-4">

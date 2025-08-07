@@ -1,8 +1,9 @@
 import { supabase } from '@/lib/supabaseClient';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import withAuth from '@/lib/withAuth';
 
-export default function AdminPage() {
+const AdminPage = () => {
   const [isAdmin, setIsAdmin] = useState(null);
   const router = useRouter();
 
@@ -17,7 +18,7 @@ export default function AdminPage() {
         .eq('id', session.user.id)
         .single();
 
-      if (user?.role !== 'admin') return router.push('/not-authorized');
+      if (user?.role !== 'admin') return router.push('/unauthorized');
       setIsAdmin(true);
     };
 
@@ -32,3 +33,5 @@ export default function AdminPage() {
     </div>
   );
 }
+
+export default withAuth(AdminPage);
