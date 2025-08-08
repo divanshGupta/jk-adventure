@@ -5,6 +5,7 @@ const ProfileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef();
   const toggleDropdown = () => setIsOpen(!isOpen);
+  const [isLoggedIn, setIsLoggedIn] = useState()
 
   useEffect(() => {
       function handleClickOutside(event) {

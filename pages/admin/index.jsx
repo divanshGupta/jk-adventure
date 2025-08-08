@@ -2,7 +2,25 @@ import { supabase } from '@/lib/supabaseClient';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import withAuth from '@/lib/withAuth';
+//breake
+// function AdminPage({ session }) {
+//   const [authorized, setAuthorized] = useState(false);
+//   const router = useRouter();
 
+//   useEffect(() => {
+//     const checkRole = async () => {
+//       const { role } = await getUserRole(session.user.email);
+//       if (role === 'admin') {
+//         setAuthorized(true);
+//       } else {
+//         router.replace('/profile');
+//       }
+//     };
+//     checkRole();
+//   }, [session, router]);
+
+//   if (!authorized) return null;
+//break
 const AdminPage = () => {
   const [isAdmin, setIsAdmin] = useState(null);
   const router = useRouter();

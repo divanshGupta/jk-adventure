@@ -19,9 +19,6 @@ export default function LoginPage() {
       const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
-        // options: {
-        //   data: { name: "john" }, // optional: store user_metadata
-        // },
       });
 
       if (signUpError) {
@@ -29,23 +26,23 @@ export default function LoginPage() {
         return;
       }
 
-      // const userId = data.user?.id;
+      const userId = data.user?.id;
 
-      // if (userId) {
-      //   const { error: dbError } = await supabase.from('users').insert([
-      //     {
-      //       id: userId,
-      //       name,
-      //       email,
-      //       user_role: 'user', // default role
-      //     },
-      //   ]);
+      if (userId) {
+        // const { error: dbError } = await supabase.from('users').insert([
+        //   {
+        //     id: userId,
+        //     name,
+        //     email,
+        //     role: 'user', // default role
+        //   },
+        // ]);
 
-      //   if (dbError) {
-      //     console.error('Failed to insert into users table:', dbError.message);
-      //     setError('Signup succeeded, but failed to save user profile.');
-      //   }
-      // }
+        if (dbError) {
+          console.error('Failed to insert into users table:', dbError.message);
+          setError('Signup succeeded, but failed to save user profile.');
+        }
+      }
 
         alert('Check your email to verify your account.');
       } else {
@@ -57,7 +54,6 @@ export default function LoginPage() {
 
         if (loginError) {
           setError(loginError.message);
-          return { user, error };
         }
 
         // ✅ Optional: Check user role from 'users' table and redirect accordingly

@@ -5,6 +5,7 @@ import { supabase } from '@/lib/supabaseClient';
 const UserSettings = () => {
   const [user, setUser] = useState(null);
   const [name, setName] = useState('');
+  const [phone, setPhone] = useState('')
   const router = useRouter();
 
   useEffect(() => {
@@ -18,11 +19,12 @@ const UserSettings = () => {
       // Optional: Load user's name from your `users` table
       const { data: profile } = await supabase
         .from('users')
-        .select('name')
+        .select('name, phone')
         .eq('id', user.id)
         .single();
 
       if (profile) setName(profile.name);
+      if (profile) setPhone(profile.phone);
     };
 
     fetchUser();
@@ -33,7 +35,7 @@ const UserSettings = () => {
 
     const { error } = await supabase
       .from('users')
-      .update({ name })
+      .update({ name, phone })
       .eq('id', user.id);
 
     if (error) alert('Update failed!');
@@ -57,6 +59,13 @@ const UserSettings = () => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              className="w-full border px-3 py-2 rounded-md"
+            />
+            <label className="block text-gray-700">Phone number</label>
+            <input
+              type="number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               className="w-full border px-3 py-2 rounded-md"
             />
           </div>

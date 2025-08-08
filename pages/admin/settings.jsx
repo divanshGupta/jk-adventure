@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { supabase } from '@/lib/supabaseClient';
+import withAuth from '@/lib/withAuth';
 
 const AdminSettings = () => {
   const [user, setUser] = useState(null);
@@ -51,4 +52,4 @@ const AdminSettings = () => {
   );
 };
 
-export default AdminSettings;
+export default withAuth(AdminSettings);

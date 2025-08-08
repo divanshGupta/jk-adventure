@@ -11,7 +11,7 @@ const CallButton = () => {
   return (
     <a
       href="tel:9140251061"
-      className={`fixed bottom-4 right-4 bg-primary text-white px-4 py-3 rounded-full shadow-lg hover:bg-primary-dark transition-all duration-300 z-50 transform active:scale-95 ${
+      className={`hidden fixed bottom-4 right-4 bg-primary text-white px-4 py-3 rounded-full shadow-lg hover:bg-primary-dark transition-all duration-300 z-50 transform active:scale-95 ${
         animate ? 'animate-bounce' : ''
       }`}
     >

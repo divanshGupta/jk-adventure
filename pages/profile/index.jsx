@@ -1,10 +1,9 @@
 import { useRouter } from "next/router";
 import withAuth from "@/lib/withAuth";
-import React, { useState } from "react";
+import React from "react";
 
 const ProfileDashboard = ({ session }) => {
   const router = useRouter();
-  const [name, setName] = useState('');
 
   return (
     <div className="flex items-center justify-center min-h-screen p-6 md:p-12">
