@@ -1,16 +1,67 @@
 import { useRouter } from "next/router";
 import withAuth from "@/lib/withAuth";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { getUserRole } from "@/lib/auth";
+import { supabase } from "@/lib/supabaseClient";
+import { createUserProfile } from "@/lib/auth";
+import { getUserProfile } from "@/lib/auth";
 
-const ProfileDashboard = ({ session }) => {
-  const router = useRouter();
+const ProfileDashboard = ({ session, userProfile }) => {
+
+  const [name, setName] = useState('');
+  const [authorized, setAuthorized] = useState(false);
+    const router = useRouter();
+  
+    useEffect(() => {
+      const checkRole = async () => {
+        const { role } = await getUserRole(session.user.email);
+        if (role === 'user') {
+          setAuthorized(true);
+        } else {
+          router.replace('/unauthorized');
+        }
+      };
+      checkRole();
+    }, [session, router]);
+  
+    useEffect(() => {
+      const getSessionAndCreateUser = async () => {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+
+        if (session?.user) {
+          // Try inserting into `users` table
+          const { data, error } = await createUserProfile(session.user);
+          if (error && error.code !== '23505') { // 23505 = duplicate key
+            console.error("Failed to create user profile", error);
+          }
+        }
+      };
+
+      getSessionAndCreateUser();
+    }, []);
+
+    //fetching user's information
+    // useEffect(() => {
+    //   const fetchUser = async () => {
+    //     const profile = await getUserProfile();
+    //     if (profile) {
+    //       setName(profile.name);
+    //     }
+    //   };
+    //   fetchUser();
+    // }, []);
+
+    if (!authorized) return null;
 
   return (
     <div className="flex items-center justify-center min-h-screen p-6 md:p-12">
       <div>
         <div className="p-4">
           <h1 className="text-xl font-bold">Profile</h1>
-          <p>Logged in as: <strong>{session?.user?.email}</strong></p>
+          <h1>Welcome, {userProfile?.name || 'User'}!</h1>
+          <p>Logged in as: <strong>{session.user.email}</strong></p>
         </div>
         <div className="space-y-4">
           <p>Manage your bookings, settings, and more.</p>

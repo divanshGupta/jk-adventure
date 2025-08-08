@@ -1,79 +1,39 @@
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-import { supabase } from '../../lib/supabaseClient'
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { loginUser, signUpUser, getUserRole } from '@/lib/auth';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [name, setName] = useState('') // Only used during signup
-  const [isSignup, setIsSignup] = useState(false)
-  const [error, setError] = useState('')
-  const router = useRouter()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isSignup, setIsSignup] = useState(false);
+  const [error, setError] = useState('');
+  const router = useRouter();
 
   const handleAuth = async (e) => {
     e.preventDefault();
     setError('');
 
     if (isSignup) {
-      // SIGNUP
-      const { data, error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-      });
+      const { error } = await signUpUser(email, password);
+      if (error) return setError(error.message);
 
-      if (signUpError) {
-        setError(signUpError.message);
-        return;
+      alert('Check your email to verify your account.');
+    } else {
+      const { data, error: loginError } = await loginUser(email, password);
+      if (loginError) return setError(loginError.message);
+
+      const { role, error: roleError } = await getUserRole(email);
+      if (roleError) {
+        console.warn('No user profile yet or role fetch failed:', roleError.message);
       }
 
-      const userId = data.user?.id;
-
-      if (userId) {
-        // const { error: dbError } = await supabase.from('users').insert([
-        //   {
-        //     id: userId,
-        //     name,
-        //     email,
-        //     role: 'user', // default role
-        //   },
-        // ]);
-
-        if (dbError) {
-          console.error('Failed to insert into users table:', dbError.message);
-          setError('Signup succeeded, but failed to save user profile.');
-        }
-      }
-
-        alert('Check your email to verify your account.');
+      if (role === 'admin') {
+        router.push('/admin');
       } else {
-        // LOGIN
-        const { data, error: loginError } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-
-        if (loginError) {
-          setError(loginError.message);
-        }
-
-        // ✅ Optional: Check user role from 'users' table and redirect accordingly
-        const {
-          data: userProfile,
-          error: profileError,
-        } = await supabase.from('users').select('role').eq('email', email).single();
-
-        if (profileError) {
-          console.error('Failed to fetch user role:', profileError.message);
-        }
-
-        if (userProfile?.role === 'admin') {
-          router.push('/admin');
-        } else {
-          router.push('/profile'); // default user route
-        }
+        router.push('/profile');
       }
+    }
   };
-
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
@@ -81,17 +41,6 @@ export default function LoginPage() {
         <h2 className="text-xl font-semibold text-center">
           {isSignup ? 'Create Account' : 'Login'}
         </h2>
-
-        {/* {isSignup && (
-          // <input
-          //   type="text"
-          //   placeholder="Name"
-          //   value={name}
-          //   // required
-          //   onChange={(e) => setName(e.target.value)}
-          //   className="w-full p-2 border rounded"
-          // />
-        )} */}
 
         <input
           type="email"
@@ -128,4 +77,4 @@ export default function LoginPage() {
       </form>
     </div>
   );
-};
+}
