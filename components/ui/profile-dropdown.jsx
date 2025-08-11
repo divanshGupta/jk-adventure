@@ -1,11 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { CgProfile } from "react-icons/cg";
+import useUserProfile from '@/hooks/useUserProfile';
+import { href } from 'react-router';
+import { roleBasedRoutes } from '@/config/routes';
 
 const ProfileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef();
   const toggleDropdown = () => setIsOpen(!isOpen);
-  const [isLoggedIn, setIsLoggedIn] = useState()
+  const [isLoggedIn, setIsLoggedIn] = useState();
+  const { isAdmin } = useUserProfile();
 
   useEffect(() => {
       function handleClickOutside(event) {
@@ -27,7 +31,7 @@ const ProfileMenu = () => {
         <ul className="absolute right-0 top-12 w-48 bg-white border border-gray-200 rounded-lg shadow-md text-sm font-medium overflow-hidden z-50">
           <li>
             <a
-              href="/profile"
+              href="/profile/"
               className="block px-4 py-3 hover:bg-gray-50 transition-colors"
             >
               Profile

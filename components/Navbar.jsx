@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ProfileMenu from './ui/profile-dropdown';
+import { CircleUser } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +21,6 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Profile', path: '/profile' },
     { name: 'Tour Packages', path: '/tours/' },
     { name: 'Taxi Service', path: '/taxis' },
     { name: 'Adventure Sports', path: '/adventures' },
@@ -28,8 +28,6 @@ const Navbar = () => {
     { name: 'Gallery', path: '/gallery' },
     { name: 'About Us', path: '/about' },
     { name: 'Contact Us', path: '/contact' },
-    { name: 'Blog', path: '/Blog' },
-    { name: 'Log In', path: '/auth/login' },
   ];
 
   const desktopNavLinks = [
@@ -52,7 +50,7 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 transform z-50 transition-all duration-300
               ${scrolled ? 'bg-slate-50 w-full md:px-12 shadow-lg' : 'w-full rounded-none'}`}>
       <div className="w-full mx-auto">
-        <div className="flex justify-between items-center py-3 px-6 md:px-40">
+        <div className="flex justify-between items-center py-4 px-6 md:px-40">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             {/* <Image src="/logo.jpg"
@@ -60,7 +58,7 @@ const Navbar = () => {
                 width={40}
                 height={40}
             /> */}
-            <span className="text-2xl font-bold bg-clip-text bg-yellow-300 text-black px-4 py-2">
+            <span className="text-2xl font-bold bg-clip-text bg-yellow-300 text-black">
               JK Adventure
             </span>
           </Link>
@@ -104,12 +102,18 @@ const Navbar = () => {
           </button>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex gap-4 items-center justify-center">
+            <Link
+              href={'/profile'}
+              className="text-foreground hover:text-primary transition-colors "
+            >
+              <CircleUser className='w-8 h-8'/>
+            </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-foreground hover:text-primary transition-colors "
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
             </button>
           </div>
         </div>

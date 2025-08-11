@@ -1,81 +1,73 @@
 import { useRouter } from "next/router";
-import withAuth from "@/lib/withAuth";
-import React, { useState, useEffect } from "react";
-import { getUserRole } from "@/lib/auth";
+import React, { useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
-import { createUserProfile } from "@/lib/auth";
-import { getUserProfile } from "@/lib/auth";
+import useUserProfile from "@/hooks/useUserProfile";
+import ProfileCard from "@/components/ProfileCard";
+import ProfileMenu from "@/components/ProfileMenu";
+import { Loader } from "lucide-react";
 
-const ProfileDashboard = ({ session, userProfile }) => {
+export default function ProfileDashboard() {
+  const router = useRouter();
+  const { session, user, isAdmin, isLoggedIn, loading } = useUserProfile();
 
-  const [name, setName] = useState('');
-  const [authorized, setAuthorized] = useState(false);
-    const router = useRouter();
-  
-    useEffect(() => {
-      const checkRole = async () => {
-        const { role } = await getUserRole(session.user.email);
-        if (role === 'user') {
-          setAuthorized(true);
-        } else {
-          router.replace('/unauthorized');
-        }
-      };
-      checkRole();
-    }, [session, router]);
-  
-    useEffect(() => {
-      const getSessionAndCreateUser = async () => {
-        const {
-          data: { session },
-        } = await supabase.auth.getSession();
+  // Redirect if not logged in
+  useEffect(() => {
+    if (!loading && !isLoggedIn) {
+      router.replace("/auth/login");
+    }
+  }, [loading, isLoggedIn, router]);
 
-        if (session?.user) {
-          // Try inserting into `users` table
-          const { data, error } = await createUserProfile(session.user);
-          if (error && error.code !== '23505') { // 23505 = duplicate key
-            console.error("Failed to create user profile", error);
-          }
-        }
-      };
+  // Redirect if profile is missing even after login
+  useEffect(() => {
+    if (!loading && isLoggedIn && !user) {
+      console.warn("No profile found, redirecting to login.");
+      router.replace("/auth/login");
+    }
+  }, [loading, isLoggedIn, user, router]);
 
-      getSessionAndCreateUser();
-    }, []);
+  const adminMenu = [
+    { label: "Personal Information", path: "/profile/info", type: "link" },
+    { label: "Bookings List", path: "/profile/bookings", type: "link" },
+    { label: "Users List", path: "/profile/users", type: "link" },
+    { label: "Packages List", path: "/profile/packages", type: "link" },
+    { label: "Media", path: "/profile/media", type: "link" },
+    { label: "Settings", path: "/profile/settings", type: "link" },
+    { label: "Logout", type: "action" },
+  ];
 
-    //fetching user's information
-    // useEffect(() => {
-    //   const fetchUser = async () => {
-    //     const profile = await getUserProfile();
-    //     if (profile) {
-    //       setName(profile.name);
-    //     }
-    //   };
-    //   fetchUser();
-    // }, []);
+  const userMenu = [
+    { label: "Personal Information", path: "/profile/info", type: "link" },
+    { label: "Bookings List", path: "/profile/bookings", type: "link" },
+    { label: "Wishlist", path: "/profile/wishlist", type: "link" },
+    { label: "Settings", path: "/profile/settings", type: "link" },
+    { label: "Logout", type: "action" },
+  ];
 
-    if (!authorized) return null;
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/auth/login");
+  };
+
+  if (loading || (!user && isLoggedIn)) {
+    return (
+      <div className="h-screen w-screen flex flex-col items-center justify-center">
+        <Loader className="animate-spin mb-2" />
+        <span>Loading profile...</span>
+      </div>
+    );
+  }
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-6 md:p-12">
-      <div>
-        <div className="p-4">
-          <h1 className="text-xl font-bold">Profile</h1>
-          <h1>Welcome, {userProfile?.name || 'User'}!</h1>
-          <p>Logged in as: <strong>{session.user.email}</strong></p>
-        </div>
-        <div className="space-y-4">
-          <p>Manage your bookings, settings, and more.</p>
-          <div className="flex flex-col md:flex-row gap-4">
-            <button onClick={() => router.push("/profile/bookings")} className="bg-blue-600 text-white px-4 py-2 rounded">
-              View Bookings
-            </button>
-            <button onClick={() => router.push("/profile/settings")} className="bg-gray-600 text-white px-4 py-2 rounded">
-              Account Settings
-            </button>
-          </div>
+    <div className=" min-h-screen p-4 md:p-12">
+      <div className="mt-14 md:mt-20">
+        <div className="max-w-5xl mx-auto">
+          <ProfileCard userProfile={user} />
+          <ProfileMenu
+            menuItems={isAdmin ? adminMenu : userMenu}
+            logoutFunction={handleLogout}
+          />
         </div>
       </div>
     </div>
   );
 }
-export default withAuth(ProfileDashboard);

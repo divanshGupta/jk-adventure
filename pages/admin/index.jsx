@@ -2,48 +2,57 @@
 import { useRouter } from 'next/router';
 import withAdminAuth from '@/lib/withAdminAuth';
 import useUserProfile from '@/hooks/useUserProfile'
+import ProfileCard from '@/components/ProfileCard';
+import ProfileMenu from '@/components/ProfileMenu';
+import { Loader } from "lucide-react";
 
 function AdminPage() {
- const { admin, isAdmin } = useUserProfile();
+ const { session, user, isAdmin, isLoggedIn, loading } = useUserProfile();
 
   // const [authorized, setAuthorized] = useState(false);
   const router = useRouter();
+  
+  const adminMenu = [
+        { label: "Personal Information", path: "/profile/info" },
+        { label: "Bookings List", path: "/profile/bookings" },
+        { label: "Users List", path: "/admin/users" },
+        { label: "Packages List", path: "/admin/packages" },
+        { label: "Media", path: "/admin/media" },
+        { label: "Settings", path: "/profile/settings" },
+        { label: "Logout", path: "/logout" },
+  ];
 
-  // useEffect(() => {
-  //   const checkRole = async () => {
-  //     const { role } = await getUserRole(session.user.email);
-  //     if (role === 'admin') {
-  //       setAuthorized(true);
-  //     } else {
-  //       router.replace('/unauthorized');
-  //     }
-  //   };
-  //   checkRole();
-  // }, [session, router]);
+  // Logout handler
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/auth/login");
+  };
 
-  // if (!authorized) return null;
+  if (loading) {
+    return <div className="h-screen w-screen flex items-center justify-center">
+      <Loader />
+      Loading...
+    </div>;
+  }
+
+  if (!user) return null; // Avoid rendering if no profile
 
   if (!isAdmin) return <p>Access denied. Admins only.</p>;
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-6 md:p-12">
-      <div>
-        <div className="p-4">
-          <h1 className="text-xl font-bold">Admin Profile</h1>
-          <p>Logged in as: {admin?.name}</p>
-        </div>
-        <div className="space-y-4">
-          <p>Manage your bookings, settings, and users list.</p>
-          <div className="flex flex-col md:flex-row gap-4">
-            <button onClick={() => router.push("/profile/bookings")} className="bg-blue-600 text-white px-4 py-2 rounded">
-              View Bookings
-            </button>
-            <button onClick={() => router.push("/profile/settings")} className="bg-gray-600 text-white px-4 py-2 rounded">
-              Account Settings
-            </button>
+    <div className="pt-20 min-h-screen p-4 md:p-12">
+          <div className="mt-12 md:mt-20">
+            <div className="max-w-5xl mx-auto">
+              {/* Profile Header */}
+              <ProfileCard userProfile={user} />
+    
+              {/* Menu */}
+              <ProfileMenu
+                menuItems={isAdmin ? adminMenu : userMenu}
+                logoutFunction={handleLogout}
+              />
+            </div>
           </div>
-        </div>
-      </div>
     </div>
   );
 }

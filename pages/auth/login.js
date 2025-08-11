@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { loginUser, signUpUser, getUserRole } from '@/lib/auth';
+import { loginUser, signUpUser, getUserRole, createUserProfile } from '@/lib/auth';
+import { supabase } from '@/lib/supabaseClient';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -16,28 +17,27 @@ export default function LoginPage() {
     if (isSignup) {
       const { error } = await signUpUser(email, password);
       if (error) return setError(error.message);
-
       alert('Check your email to verify your account.');
     } else {
       const { data, error: loginError } = await loginUser(email, password);
       if (loginError) return setError(loginError.message);
 
-      const { role, error: roleError } = await getUserRole(email);
-      if (roleError) {
-        console.warn('No user profile yet or role fetch failed:', roleError.message);
+      // Get current user ID & ensure profile exists
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { role } = await getUserRole(email);
+        if (!role) {
+          await createUserProfile(user, { role: 'user' });
+        }
       }
 
-      if (role === 'admin') {
-        router.push('/admin');
-      } else {
-        router.push('/profile');
-      }
+      router.push('/profile');
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <form onSubmit={handleAuth} className="bg-white p-8 rounded shadow max-w-sm w-full space-y-4">
+      <form onSubmit={handleAuth} className="bg-white p-8 rounded-md shadow max-w-sm w-full space-y-4">
         <h2 className="text-xl font-semibold text-center">
           {isSignup ? 'Create Account' : 'Login'}
         </h2>

@@ -3,11 +3,9 @@ import { supabase } from "@/lib/supabaseClient";
 
 export default function useUserProfile() {
   const [session, setSession] = useState(null);
-  const [user, setUser] = useState(null); // current user
-  const [admin, setAdmin] = useState(null); // admin details
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch user profile from users table
   const fetchUserProfile = async (userId) => {
     try {
       const { data, error } = await supabase
@@ -23,27 +21,13 @@ export default function useUserProfile() {
     }
   };
 
-  // Fetch admin details
-  const fetchAdminProfile = async () => {
-    try {
-      const { data, error } = await supabase
-        .from("users")
-        .select("id, name, email, phone, role")
-        .eq("role", "admin")
-        .single(); // assuming there’s only 1 admin
-
-      if (error) throw error;
-      setAdmin(data);
-    } catch (err) {
-      console.error("Error fetching admin:", err.message);
-    }
-  };
-
   useEffect(() => {
     let mounted = true;
 
-    const loadSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+    const init = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
 
       if (!mounted) return;
 
@@ -51,25 +35,24 @@ export default function useUserProfile() {
 
       if (session?.user?.id) {
         await fetchUserProfile(session.user.id);
-        await fetchAdminProfile(); // fetch admin’s data too
+      } else {
+        setUser(null);
       }
 
-      setLoading(false);
+      setLoading(false); // ✅ Always stop loading after first check
     };
 
-    loadSession();
+    init();
 
-    // Listen to auth changes
     const { data: listener } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
         setSession(session);
         if (session?.user?.id) {
           await fetchUserProfile(session.user.id);
-          await fetchAdminProfile();
         } else {
           setUser(null);
-          setAdmin(null);
         }
+        setLoading(false); // ✅ Also stop loading on auth change
       }
     );
 
@@ -81,10 +64,9 @@ export default function useUserProfile() {
 
   return {
     session,
-    user,       // current logged-in user
-    admin,      // admin’s details
+    user,
     loading,
     isAdmin: user?.role === "admin",
-    isLoggedIn: !!session?.user
+    isLoggedIn: !!session?.user,
   };
 }
