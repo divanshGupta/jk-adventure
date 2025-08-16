@@ -19,8 +19,9 @@ export default function ProfileMenu({ menuItems, logoutFunction }) {
         if (item.type === "action") {
             return (
                 <button
+                key={idx}
                     onClick={logoutFunction}
-                    className="text-red-600 w-full flex items-center justify-between p-4 hover:bg-gray-100 cursor-pointer"
+                    className="text-red-600 w-full flex items-center justify-between p-6 hover:bg-gray-100 cursor-pointer"
                     >
                     Log Out
                 </button>

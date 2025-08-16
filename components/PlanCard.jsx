@@ -6,8 +6,6 @@ import Link from 'next/link';
 
 const PlanCard = ({ plan, serviceType }) => {
 
-  console.log("Images array:", plan.images);
-
   return (
     <div className="group relative w-full max-w-sm mx-auto rounded-2xl overflow-hidden shadow-lg bg-white/20 backdrop-blur-md hover:shadow-xl transition-all"
       style={{ height: '460px' }} // ✅ Force fixed height

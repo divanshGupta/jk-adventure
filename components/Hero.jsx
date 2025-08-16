@@ -44,27 +44,28 @@ export default function HeroSection() {
       <Image
         src="/images/hero/kashmir-bhadarva-2.jpg" // Ensure this is optimized: 1600px width max
         alt="Mountain Background"
-        layout="fill"
-        objectFit="cover"
+        layout="fill" 
         quality={75}
         priority // Loads it immediately
-        className="z-0"
+        as="image"
+        className="z-0 object-cover"
       />
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40 z-0">
+      <div className="absolute bottom-0 left-0 w-full h-[150px] bg-gradient-to-t from-black via-transparent to-transparent" />
       </div>
       {/* Content */}
-      <div className="relative z-10 max-w-6xl px-4 md:pt-20">
+      <div className="relative z-10 max-w-6xl px-4 pt-20">
         {/* Desktop Intro Text */}
         <div className='mb-10'>
-          <div className="text-center mb-6 text-[#FAFAFA] font-bold
+          <div className="w-full text-center mb-6 text-[#FAFAFA]
           flex flex-col md:gap-4">
-            <h1 className='text-[44px] md:text-6xl'>Explore</h1>
-            <h1 className='text-[44px] md:text-7xl'>Jammu & Kashmir</h1>
-            <h1 className='text-[44px] md:text-6xl'>With Ease</h1>
+            <h1 className='text-4xl leading-relaxed md:text-5xl font-semibold'>Explore</h1>
+            <h1 className='text-4xl leading-relaxed md:text-7xl font-bold tracking-wider'>Jammu & Kashmir</h1>
+            <h1 className='text-4xl leading-relaxed md:text-5xl font-semibold'>With Ease</h1>
           </div>
           <div>
-            <p className="text-center mt-2 text-lg font-medium text-gray-200">
+            <p className="text-center text-lg font-medium text-gray-200">
               Trusted local rides, adventures, and more — one click away.
             </p>
           </div>
@@ -80,7 +81,7 @@ export default function HeroSection() {
                 >
                   <div className="mb-2">{service.icon}</div>
                   <p className="text-sm md:text-xl text-center font-semibold mb-4">{service.title}</p>
-                  <p className='text-sm font-normal'>{service.subTitle}</p>
+                  <p className='hidden md:block text-sm font-normal'>{service.subTitle}</p>
                 </div>
               </div>
             </Link>

@@ -1,15 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { CgProfile } from "react-icons/cg";
 import useUserProfile from '@/hooks/useUserProfile';
-import { href } from 'react-router';
-import { roleBasedRoutes } from '@/config/routes';
+import Link from 'next/link';
 
-const ProfileMenu = () => {
+const ProfileDropdown = ( { logoutFunction }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef();
   const toggleDropdown = () => setIsOpen(!isOpen);
-  const [isLoggedIn, setIsLoggedIn] = useState();
-  const { isAdmin } = useUserProfile();
+  const { isAdmin, isLoggedIn } = useUserProfile();
 
   useEffect(() => {
       function handleClickOutside(event) {
@@ -37,29 +35,23 @@ const ProfileMenu = () => {
               Profile
             </a>
           </li>
+          
           <li>
-            <a
-              href="/profile/bookings"
-              className="block px-4 py-3  hover:bg-gray-50 transition-colors"
+            {isLoggedIn 
+            ? 
+            <button
+              onClick={logoutFunction}
+              className="px-4 py-3 text-red-600 hover:bg-red-50 transition-colors"
             >
-              Bookings
-            </a>
-          </li>
-          <li>
-            <a
-              href="/profile/settings"
-              className="block px-4 py-3 hover:bg-gray-50 transition-colors"
-            >
-              Settings
-            </a>
-          </li>
-          <li>
-            <a
+              Log Out
+            </button>
+            : 
+            <Link
               href="/auth/login"
-              className="block px-4 py-3 text-red-600 hover:bg-red-50 transition-colors"
+              className="block px-4 py-3 text-green-600 hover:bg-red-50 transition-colors"
             >
               Log In
-            </a>
+            </Link>}
           </li>
         </ul>
       )}
@@ -67,4 +59,4 @@ const ProfileMenu = () => {
   );
 };
 
-export default ProfileMenu;
+export default ProfileDropdown;

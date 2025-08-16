@@ -84,14 +84,14 @@ export default function Home() {
               discountedPrice: '2499',
             },
             {
-              images: ['/images/img9.jpg'],
+              images: ['/images/img7.jpg', '/images/img6.jpg', '/images/img5.jpg'],
               title: 'Pahalgam Adventure',
               time: '5 Days 4 Nights',
               price: '5999',
               discountedPrice: '4999',
             },
             {
-              images: ['/images/img8.jpg'],
+              images: ['/images/img7.jpg', '/images/img6.jpg', '/images/img5.jpg'],
               title: 'Srinagar Heritage Tour',
               time: '7 Days 7 Nights',
               price: '8999',

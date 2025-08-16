@@ -3,10 +3,13 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import ProfileMenu from './ui/profile-dropdown';
 import { CircleUser } from 'lucide-react';
+import ProfileDropdown from './ui/profile-dropdown';
+import { supabase } from "@/lib/supabaseClient";
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -45,6 +48,10 @@ const Navbar = () => {
   { name: 'Contact', path: '/contact' },
   ];
 
+  const handleLogout = async () => {
+      await supabase.auth.signOut();
+      router.push("/auth/login");
+    };
 
   return (
     <nav className={`fixed top-0 left-0 transform z-50 transition-all duration-300
@@ -98,7 +105,7 @@ const Navbar = () => {
           </div>
 
           <button className="hidden md:block" >
-              <ProfileMenu />
+              <ProfileDropdown logoutFunction={handleLogout} />
           </button>
 
           {/* Mobile Menu Button */}

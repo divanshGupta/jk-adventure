@@ -27,17 +27,17 @@ export default function ProfileDashboard() {
 
   const adminMenu = [
     { label: "Personal Information", path: "/profile/info", type: "link" },
-    { label: "Bookings List", path: "/profile/bookings", type: "link" },
-    { label: "Users List", path: "/profile/users", type: "link" },
-    { label: "Packages List", path: "/profile/packages", type: "link" },
-    { label: "Media", path: "/profile/media", type: "link" },
+    { label: "Bookings List", path: "/admin/bookings", type: "link" },
+    { label: "Users List", path: "/admin/users", type: "link" },
+    { label: "Packages List", path: "/admin/packages", type: "link" },
+    { label: "Media", path: "/admin/media", type: "link" },
     { label: "Settings", path: "/profile/settings", type: "link" },
     { label: "Logout", type: "action" },
   ];
 
   const userMenu = [
     { label: "Personal Information", path: "/profile/info", type: "link" },
-    { label: "Bookings List", path: "/profile/bookings", type: "link" },
+    { label: "Bookings List", path: "/bookings", type: "link" },
     { label: "Wishlist", path: "/profile/wishlist", type: "link" },
     { label: "Settings", path: "/profile/settings", type: "link" },
     { label: "Logout", type: "action" },
@@ -58,7 +58,7 @@ export default function ProfileDashboard() {
   }
 
   return (
-    <div className=" min-h-screen p-4 md:p-12">
+    <div className="min-h-screen p-4 md:p-12">
       <div className="mt-14 md:mt-20">
         <div className="max-w-5xl mx-auto">
           <ProfileCard userProfile={user} />

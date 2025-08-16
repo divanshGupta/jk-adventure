@@ -10,16 +10,12 @@ const Reviews = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const reviews = [
-        {id: 1, name: "Alice Johnson", location: "New York, NY", text: "Amazing service! Highly recommend.", rating: 5, image: "/images/alice.jpg"},
-        {id: 2, name: "Bob Smith", location: "Los Angeles, CA", text: "Great experience, very professional.", rating: 4, image: "/images/bob.jpg"},
-        {id: 3, name: "Charlie Brown", location: "Chicago, IL", text: "Loved   the attention to detail.", rating: 5, image: "/images/charlie.jpg"},
-        {id: 4, name: "Diana Prince", location: "Miami, FL", text: "Exceptional quality and service.", rating: 5, image: "/images/diana.jpg"},
-        {id: 5, name: "Ethan Hunt", location: "Seattle, WA", text: "Fantastic team, very responsive.", rating: 4, image: "/images/ethan.jpg"},
-        {id: 6, name: "Alice Johnson", location: "New York, NY", text: "Amazing service! Highly recommend.", rating: 5, image: "/images/alice.jpg"},
-        {id: 7, name: "Bob Smith", location: "Los Angeles, CA", text: "Great experience, very professional.", rating: 4, image: "/images/bob.jpg"},
-        {id: 8, name: "Charlie Brown", location: "Chicago, IL", text: "Loved   the attention to detail.", rating: 5, image: "/images/charlie.jpg"},
-        {id: 9, name: "Diana Prince", location: "Miami, FL", text: "Exceptional quality and service.", rating: 5, image: "/images/diana.jpg"},
-        {id: 10, name: "Ethan Hunt", location: "Seattle, WA", text: "Fantastic team, very responsive.", rating: 4, image: "/images/ethan.jpg"},
+        {id: 1, name: "Alice Johnson", location: "New York, NY", text: "Amazing service! Highly recommend.", rating: 5, image: "/images/bike1.jpg"},
+        {id: 2, name: "Bob Smith", location: "Los Angeles, CA", text: "Great experience, very professional.", rating: 4, image: "/images/bike1.jpg"},
+        {id: 3, name: "Charlie Brown", location: "Chicago, IL", text: "Loved   the attention to detail.", rating: 5, image: "/images/bike1.jpg"},
+        {id: 4, name: "Diana Prince", location: "Miami, FL", text: "Exceptional quality and service.", rating: 5, image: "/images/bike1.jpg"},
+        {id: 5, name: "Ethan Hunt", location: "Seattle, WA", text: "Fantastic team, very responsive.", rating: 4, image: "/images/bike1.jpg"},
+        {id: 6, name: "Alice Johnson", location: "New York, NY", text: "Amazing service! Highly recommend.", rating: 5, image: "/images/bike1.jpg"},
     ];
 
     const scrollToIndex = (index) => {
