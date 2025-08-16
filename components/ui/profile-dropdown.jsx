@@ -7,7 +7,7 @@ const ProfileDropdown = ( { logoutFunction }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef();
   const toggleDropdown = () => setIsOpen(!isOpen);
-  const { isAdmin, isLoggedIn } = useUserProfile();
+  const { user, isAdmin, isLoggedIn } = useUserProfile();
 
   useEffect(() => {
       function handleClickOutside(event) {
@@ -19,10 +19,22 @@ const ProfileDropdown = ( { logoutFunction }) => {
       return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    const firstLetter = user?.name.charAt(0).toUpperCase() || "";
+    const fullName = user?.name.trim() || "";
+const surnameInitial = fullName.split(" ")[1]?.charAt(0).toUpperCase() || "";
+
+
+
   return (
     <div ref={menuRef} className="relative flex items-center gap-4">
       <div onClick={toggleDropdown} className="cursor-pointer">
+        {firstLetter ? 
+        <div className="w-10 h-10 rounded-full bg-transparent border-2 border-black text-black text-2xl flex items-center justify-center font-semibold">
+          {firstLetter + surnameInitial}
+        </div>
+        : 
         <CgProfile size={42}/>
+        }
       </div>
 
       {isOpen && (
