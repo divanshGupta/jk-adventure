@@ -12,12 +12,13 @@ export default function useUserProfile() {
         .from("users")
         .select("id, name, phone, email, role")
         .eq("id", userId)
-        .single();
+        .single(); // ✅ prevent hanging
 
       if (error) throw error;
       setUser(data);
     } catch (err) {
       console.error("Error fetching profile:", err.message);
+      setUser(null); // ✅ always clear if failed
     }
   };
 
@@ -25,21 +26,26 @@ export default function useUserProfile() {
     let mounted = true;
 
     const init = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
 
-      if (!mounted) return;
+        if (!mounted) return;
 
-      setSession(session);
+        setSession(session);
 
-      if (session?.user?.id) {
-        await fetchUserProfile(session.user.id);
-      } else {
+        if (session?.user?.id) {
+          await fetchUserProfile(session.user.id);
+        } else {
+          setUser(null);
+        }
+      } catch (err) {
+        console.error("Init error:", err.message);
         setUser(null);
+      } finally {
+        if (mounted) setLoading(false); // ✅ always stop
       }
-
-      setLoading(false); // ✅ Always stop loading after first check
     };
 
     init();
@@ -52,7 +58,7 @@ export default function useUserProfile() {
         } else {
           setUser(null);
         }
-        setLoading(false); // ✅ Also stop loading on auth change
+        setLoading(false); // ✅ always stop
       }
     );
 
