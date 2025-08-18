@@ -2,8 +2,8 @@
 import { useRouter } from 'next/router';
 import withAdminAuth from '@/lib/withAdminAuth';
 import useUserProfile from '@/hooks/useUserProfile'
-import ProfileCard from '@/components/ProfileCard';
-import ProfileMenu from '@/components/ProfileMenu';
+import ProfileCard from '@/components/Profile/ProfileCard';
+import ProfileMenu from '@/components/Profile/ProfileMenu';
 import { Loader } from "lucide-react";
 
 function AdminPage() {

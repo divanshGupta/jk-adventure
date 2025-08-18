@@ -1,6 +1,6 @@
 import React from 'react';
 import { Phone } from 'lucide-react';
-import PlanCard from './PlanCard';
+import PlanCard from '../PlanCard';
 import { allServices } from '@/lib/dummyPackages';
 
 const { tours } = allServices;

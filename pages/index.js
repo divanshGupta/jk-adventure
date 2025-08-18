@@ -1,11 +1,11 @@
-import Hero from '@/components/Hero';
-import Reviews from '@/components/Reviews';
+import Hero from '@/components/Homepage/Hero';
+import Reviews from '@/components/Homepage/Reviews';
 import React from 'react';
 import Head from 'next/head';
-import CTA from '@/components/CTA';
-import ServiceSection from '@/components/ServiceSection';
+import CTA from '@/components/ui/CTA';
+import ServiceSection from '@/components/Homepage/ServiceSection';
 import CallButton from '@/components/ui/CallButton';
-import KashmirIntro from '@/components/KashmirIntro';
+import KashmirIntro from '@/components/Homepage/KashmirIntro';
 
 <Head>
   <title>Discover Jammu & Kashmir</title>

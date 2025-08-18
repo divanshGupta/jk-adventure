@@ -39,14 +39,16 @@ const surnameInitial = fullName.split(" ")[1]?.charAt(0).toUpperCase() || "";
 
       {isOpen && (
         <ul className="absolute right-0 top-12 w-48 bg-white border border-gray-200 rounded-lg shadow-md text-sm font-medium overflow-hidden z-50">
-          <li>
-            <a
-              href="/profile/"
-              className="block px-4 py-3 hover:bg-gray-50 transition-colors"
-            >
-              Profile
-            </a>
-          </li>
+          {isLoggedIn && 
+            <li>
+              <Link
+                href="/profile/"
+                className="block px-4 py-3 hover:bg-gray-50 transition-colors"
+              >
+                Profile
+              </Link>
+            </li>
+          }
           
           <li>
             {isLoggedIn 

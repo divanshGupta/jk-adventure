@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
-import Navbar from '@/components/Navbar'
-import Footer from "@/components/Footer";
+import Navbar from '@/components/Homepage/Navbar'
+import Footer from "@/components/Homepage/Footer";
 import React, { useEffect } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { useRouter } from 'next/router'

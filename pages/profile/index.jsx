@@ -1,7 +1,7 @@
 // pages/profile/index.jsx
 import { getSupabaseServerClient } from "@/lib/supabaseServer";
-import ProfileCard from "@/components/ProfileCard";
-import ProfileMenu from "@/components/ProfileMenu";
+import ProfileCard from "@/components/Profile/ProfileCard";
+import ProfileMenu from "@/components/Profile/ProfileMenu";
 
 export default function ProfileDashboard({ profile, isAdmin }) {
   const adminMenu = [

@@ -2,9 +2,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '../ui/button';
 import { CircleUser } from 'lucide-react';
-import ProfileDropdown from './ui/profile-dropdown';
+import ProfileDropdown from '../ui/profile-dropdown';
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from 'next/router';
 

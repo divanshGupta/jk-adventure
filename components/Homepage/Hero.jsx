@@ -42,14 +42,14 @@ export default function HeroSection() {
     <section className=" relative w-full min-h-screen flex items-center justify-center bg-center bg-cover">
       {/* Optimized Background Image */}
       <Image
-        src="/images/hero/kashmir-bhadarva-2-webp.webp" // Ensure this is optimized: 1600px width max
+        src="/images/hero/kashmir-bhadarva-2.webp" // Prefer WebP for performance
         alt="Mountain Background"
-        layout="fill" 
+        fill={true}
         quality={75}
-        priority // Loads it immediately
-        as="image"
-        className="z-0 object-cover"
+        priority={true} // Ensures it's loaded early for hero sections
+        className="object-cover"
       />
+
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40 z-0">
       <div className="absolute bottom-0 left-0 w-full h-[150px] bg-gradient-to-t from-black via-transparent to-transparent" />

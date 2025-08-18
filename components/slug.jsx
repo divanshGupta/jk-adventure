@@ -1,6 +1,0 @@
-const slug = () => {
-    return (
-        <>
-        </>
-    )
-}
