@@ -1,127 +1,98 @@
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import React, { useState } from "react";
+import { set } from "zod";
 
-// ✅ Zod Schema for booking form
-const bookingSchema = z.object({
-  fullName: z.string().min(3, "Name must be at least 3 characters long"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().regex(/^[0-9]{10}$/, "Phone must be 10 digits"),
-  service: z.enum(["tour", "taxi", "adventure"], {
-    errorMap: () => ({ message: "Please select a service" }),
-  }),
-  packageName: z.string().nonempty("Package is required"),
-  date: z.string().refine(
-    (date) => new Date(date) >= new Date(),
-    "Date must be today or later"
-  ),
-  travelers: z.coerce.number().min(1, "At least 1 traveler"),
-  specialRequests: z.string().optional(),
-  agree: z.boolean().refine((val) => val === true, "You must agree to the terms"),
-});
+const ContactForm = () => {
+  const [packageName, setPackageName] = useState("");
+  const [travellers, setTravellers] = useState("");
+  const [specialReq, setSpecialReq] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
-export default function BookingForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: zodResolver(bookingSchema),
-  });
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbzMQ7gbSWsxsBwh1sRxCC0cexxJNGrDO0zEEgaVChWmaSccl2V0Q-wWJJeD2ILLA3YEBw/exec"; // Replace with Apps Script web app URL
 
-  const onSubmit = async (data) => {
+const onSubmit = async (e) => {
+  e.preventDefault();
+  const payload = {
+    name,
+    email,
+    phone,
+    specialReq,
+    travellers,
+    packageName,
+  };
+
   try {
-    const res = await fetch("https://script.google.com/macros/s/AKfycbyLgxNXw7NPS3HQ2FiqjE5x8Ki37fTuiTcbNp81khJBpVPHrJJAhBoDXSxQGt7n6emn/exec", {
+    const res = await fetch(GAS_URL, {
       method: "POST",
+      mode: "no-cors", // required for Apps Script
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify(payload),
     });
 
-    const result = await res.json();
-    console.log("Google Sheets result:", result);
-
-    if (result.result === "success") {
-      alert("✅ Booking successful!");
-    } else {
-      alert("❌ Google Sheets failed: " + result.message);
-    }
-  } catch (err) {
-    console.error("Network/Script Error:", err);
-    alert("Something went wrong. Try again.");
+    alert("Form submitted successfully!");
+    setName("");
+    setEmail("");
+    setPhone("");
+    setSpecialReq("");
+    setTravellers(""); 
+    setPackageName("");
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Something went wrong!");
   }
 };
 
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-6 max-w-lg mx-auto bg-white shadow rounded">
-      
-      {/* Name */}
-      <div>
-        <label className="block text-sm font-medium">Full Name</label>
-        <input {...register("fullName")} className="w-full border p-2 rounded" placeholder="John Doe" />
-        {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName.message}</p>}
-      </div>
+    <form onSubmit={onSubmit} className="flex flex-col gap-4 p-4 border rounded-md">
+      <input
+        type="text"
+        placeholder="Package Name"
+        value={packageName}
+        onChange={(e) => setPackageName(e.target.value)}
+        className="border p-2"
+      />
+      <input
+        type="number"
+        placeholder="Travellers"
+        value={travellers}
+        onChange={(e) => setTravellers(e.target.value)}
+        className="border p-2"
+      />
+      <input
+        type="text"
+        placeholder="Special Requests"
+        value={specialReq}
+        onChange={(e) => setSpecialReq(e.target.value)}
+        className="border p-2"
+      />
+      <input
+        type="text"
+        placeholder="Your Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="border p-2"
+      />
+      <input
+        type="email"
+        placeholder="Your Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="border p-2"
+      />
+      <input
+        type="tel"
+        placeholder="Phone"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+        className="border p-2"
+      />
 
-      {/* Email */}
-      <div>
-        <label className="block text-sm font-medium">Email</label>
-        <input {...register("email")} className="w-full border p-2 rounded" placeholder="you@example.com" />
-        {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
-      </div>
-
-      {/* Phone */}
-      <div>
-        <label className="block text-sm font-medium">Phone</label>
-        <input {...register("phone")} className="w-full border p-2 rounded" placeholder="9876543210" />
-        {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
-      </div>
-
-      {/* Service */}
-      <div>
-        <label className="block text-sm font-medium">Service</label>
-        <select {...register("service")} className="w-full border p-2 rounded">
-          <option value="">Select a service</option>
-          <option value="tour">Tour</option>
-          <option value="taxi">Taxi</option>
-          <option value="adventure">Adventure</option>
-        </select>
-        {errors.service && <p className="text-red-500 text-sm">{errors.service.message}</p>}
-      </div>
-
-      {/* Package */}
-      <div>
-        <label className="block text-sm font-medium">Package</label>
-        <input {...register("packageName")} className="w-full border p-2 rounded" placeholder="Package name" />
-        {errors.packageName && <p className="text-red-500 text-sm">{errors.packageName.message}</p>}
-      </div>
-
-      {/* Date */}
-      <div>
-        <label className="block text-sm font-medium">Date</label>
-        <input type="date" {...register("date")} className="w-full border p-2 rounded" />
-        {errors.date && <p className="text-red-500 text-sm">{errors.date.message}</p>}
-      </div>
-
-      {/* Travelers */}
-      <div>
-        <label className="block text-sm font-medium">Number of Travelers</label>
-        <input type="number" {...register("travelers")} className="w-full border p-2 rounded" min="1" />
-        {errors.travelers && <p className="text-red-500 text-sm">{errors.travelers.message}</p>}
-      </div>
-
-      {/* Special Requests */}
-      <div>
-        <label className="block text-sm font-medium">Special Requests (optional)</label>
-        <textarea {...register("specialRequests")} className="w-full border p-2 rounded" placeholder="Any special notes..." />
-      </div>
-
-      {/* Terms */}
-      <div className="flex items-center gap-2">
-        <input type="checkbox" {...register("agree")} />
-        <label>I agree to the terms & conditions</label>
-      </div>
-      {errors.agree && <p className="text-red-500 text-sm">{errors.agree.message}</p>}
-
-      {/* Submit */}
-      <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-        Book Now
+      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
+        Submit
       </button>
     </form>
   );
-}
+};
+
+export default ContactForm;
