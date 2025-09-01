@@ -1,80 +1,70 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { userAgent } from "next/server";
-import React, { useRef } from 'react';
-import { useEffect, useState } from 'react';
+// components/Reviews.jsx
+import { Star } from "lucide-react";
 
-const Reviews = () => {
+const reviews = [
+  {
+    id: 1,
+    name: "Aarav Mehta",
+    location: "Mumbai, India",
+    review:
+      "Booking with this agency was the best decision! Everything was smooth and well planned. I felt cared for every step of the journey.",
+    rating: 5,
+  },
+  {
+    id: 2,
+    name: "Sophie Williams",
+    location: "London, UK",
+    review:
+      "The team helped us customise the perfect itinerary. The entire trip was seamless and stress-free. Highly recommend!",
+    rating: 4,
+  },
+  {
+    id: 3,
+    name: "Rohan Sharma",
+    location: "Delhi, India",
+    review:
+      "From the first call to the last day of my trip, everything was handled so professionally. Definitely booking again!",
+    rating: 5,
+  },
+];
 
-    const scrollContainerRef = useRef(null);
-    const cardRef = useRef(null);
-    const [currentIndex, setCurrentIndex] = useState(0);
+export default function Reviews() {
+  return (
+    <section className="py-12 px-6 lg:px-20">
+      <div className="max-w-6xl mx-auto text-center">
+        <h3 className="text-teal-400 font-semibold mb-2">Our Happy Travellers</h3>
+        <h2 className="text-3xl md:text-4xl font-bold mb-6">What People Say</h2>
+        <p className="text-gray-700 max-w-3xl mx-auto mb-12">
+          We’re proud to have created unforgettable journeys for our clients. 
+          Here’s what some of them had to say about their experience with us.
+        </p>
 
-    const reviews = [
-        {id: 1, name: "Alice Johnson", location: "New York, NY", text: "Amazing service! Highly recommend.", rating: 5, image: "/images/bike1.jpg"},
-        {id: 2, name: "Bob Smith", location: "Los Angeles, CA", text: "Great experience, very professional.", rating: 4, image: "/images/bike1.jpg"},
-        {id: 3, name: "Charlie Brown", location: "Chicago, IL", text: "Loved   the attention to detail.", rating: 5, image: "/images/bike1.jpg"},
-        {id: 4, name: "Diana Prince", location: "Miami, FL", text: "Exceptional quality and service.", rating: 5, image: "/images/bike1.jpg"},
-        {id: 5, name: "Ethan Hunt", location: "Seattle, WA", text: "Fantastic team, very responsive.", rating: 4, image: "/images/bike1.jpg"},
-        {id: 6, name: "Alice Johnson", location: "New York, NY", text: "Amazing service! Highly recommend.", rating: 5, image: "/images/bike1.jpg"},
-    ];
-
-    const scrollToIndex = (index) => {
-    const cardWidth = cardRef.current?.offsetWidth || 300;
-    const gap = 16;
-    const scrollAmount = (cardWidth + gap) * index;
-
-    scrollContainerRef.current.scrollTo({
-      left: scrollAmount,
-      behavior: "smooth",
-    });
-  };
-
-  const handleScroll = (direction) => {
-    let newIndex =
-      direction === "left"
-        ? (currentIndex - 1 + reviews.length) % reviews.length
-        : (currentIndex + 1) % reviews.length;
-
-    setCurrentIndex(newIndex);
-    scrollToIndex(newIndex);
-  };
-    return (
-        <div className="w-[90%] md:w-[80%] mx-auto relative overflow-hidden py-8">
-
-            <button
-                onClick={() => handleScroll("left")}
-                className="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-10"
+        {/* Reviews Grid */}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {reviews.map((review) => (
+            <div
+              key={review.id}
+              className="bg-gray-800 rounded-2xl p-6 text-left shadow-lg hover:shadow-teal-500/20 transition"
             >
-                <ChevronLeft />
-            </button>
-
-            <button
-                onClick={() => handleScroll("right")}
-                className="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-md rounded-full p-2 z-10"
-            >
-                <ChevronRight />
-            </button>
-
-            <div ref={scrollContainerRef} className="flex space-x-4 overflow-x-auto scroll-smooth no-scrollbar px-12">
-                {reviews.map((r, index) => (
-                    <div key={index} 
-                    ref={index === 0 ? cardRef : null}
-                    className="min-w-[300px] bg-white rounded-xl shadow-lg p-4 flex-shrink-0">
-                        <div className="flex items-center space-x-3">
-                            <img src={r.image} className="w-12 h-12 rounded-full" />
-                            <div>
-                            <h4 className="font-semibold">{r.name}</h4>
-                            <p className="text-sm text-gray-500">{r.location}</p>
-                            </div>
-                        </div>
-                        <div className="mt-3 text-sm text-gray-700">"{r.text}"</div>
-                        <div className="mt-2 flex text-yellow-400">
-                            {"⭐".repeat(r.rating)}
-                        </div>
-                    </div>
+              {/* Rating */}
+              <div className="flex gap-1 mb-4">
+                {[...Array(review.rating)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                 ))}
+              </div>
+
+              {/* Review Text */}
+              <p className="text-gray-300 text-sm mb-6">{review.review}</p>
+
+              {/* User Info */}
+              <div>
+                <h4 className="font-semibold">{review.name}</h4>
+                <span className="text-gray-400 text-sm">{review.location}</span>
+              </div>
             </div>
+          ))}
         </div>
-    );
+      </div>
+    </section>
+  );
 }
-export default Reviews;

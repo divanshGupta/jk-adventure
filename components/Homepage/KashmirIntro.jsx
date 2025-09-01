@@ -13,7 +13,7 @@ export default function KashmirIntro() {
 
         {/* Image Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-          {["shikara.jpg", "img1.jpg", "img2.jpg", "img3.jpg"].map((img, idx) => (
+          {["shikara.webp", "img1.webp", "img2.webp", "img3.webp"].map((img, idx) => (
             <div key={idx} className="overflow-hidden rounded-lg shadow-md">
               <img
                 src={`/images/gallery/${img}`}
@@ -22,13 +22,6 @@ export default function KashmirIntro() {
               />
             </div>
           ))}
-        </div>
-
-        {/* Local Touch Quote */}
-        <div className="bg-amber-50 text-center text-amber-800 py-6 px-4 rounded-lg shadow-sm">
-          <p className="italic text-lg max-w-3xl mx-auto">
-            “Our roots lie in the valleys of Kashmir — we don’t just guide you, we welcome you like family.”
-          </p>
         </div>
 
         {/* Call to Action */}

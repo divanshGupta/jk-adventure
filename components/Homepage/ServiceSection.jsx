@@ -1,5 +1,4 @@
 import React from 'react';
-import { Phone } from 'lucide-react';
 import PlanCard from '../PlanCard';
 import { allServices } from '@/lib/dummyPackages';
 
@@ -8,7 +7,7 @@ const { tours } = allServices;
 const ServiceSection = ( { bgImage, title, description, ctaLink, ctaText }) => {
   return (
     <section
-      className="relative w-[100%] mx-auto min-h-screen flex items-center justify-center text-white mb-4 shadow hover:shadow-xl transition"
+      className="relative w-[100%] mx-auto min-h-screen flex items-center justify-center text-white shadow hover:shadow-xl transition"
     >
       <img
         src={bgImage}
@@ -19,10 +18,10 @@ const ServiceSection = ( { bgImage, title, description, ctaLink, ctaText }) => {
       <div className="absolute inset-0 bg-black/30 z-0">
       </div>
 
-      <div className="flex flex-col md:flex-row gap-4 relative z-10 max-w-6xl px-6 py-12">
+      <div className="flex flex-col md:flex-row gap-4 relative z-10 max-w-6xl px-4 md:px-6 py-6 lg:px-10">
 
         <div className='md:w-1/3'>
-          <h2 className="text-3xl md:text-7xl font-bold mb-4">{title}</h2>
+          <h2 className="text-3xl md:text-6xl font-bold mb-4">{title}</h2>
           <p className="text-lg mb-6 max-w-xl">{description}</p>
           <a
             href={ctaLink}

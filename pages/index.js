@@ -6,6 +6,7 @@ import CTA from '@/components/ui/CTA';
 import ServiceSection from '@/components/Homepage/ServiceSection';
 import CallButton from '@/components/ui/CallButton';
 import KashmirIntro from '@/components/Homepage/KashmirIntro';
+import HowToBook from '@/components/Homepage/HowToBook';
 
 <Head>
   <title>Discover Jammu & Kashmir</title>
@@ -101,6 +102,7 @@ export default function Home() {
           ctaLink="/services"
           ctaText="See All Tours →"
         />
+        <HowToBook />
         <Reviews />
         <CTA />
         <CallButton />
