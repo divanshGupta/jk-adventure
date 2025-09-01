@@ -29,7 +29,7 @@ const surnameInitial = fullName.split(" ")[1]?.charAt(0).toUpperCase() || "";
     <div ref={menuRef} className="relative flex items-center gap-4">
       <div onClick={toggleDropdown} className="cursor-pointer">
         {firstLetter ? 
-        <div className="w-10 h-10 rounded-full bg-transparent border-2 border-black text-black text-2xl flex items-center justify-center font-semibold">
+        <div className="w-7 h-7 rounded-full bg-transparent border-2 border-black text-black text-2xl lg:text-[20px] flex items-center justify-center">
           {firstLetter + surnameInitial}
         </div>
         : 
@@ -38,12 +38,12 @@ const surnameInitial = fullName.split(" ")[1]?.charAt(0).toUpperCase() || "";
       </div>
 
       {isOpen && (
-        <ul className="absolute right-0 top-12 w-48 bg-white border border-gray-200 rounded-lg shadow-md text-sm font-medium overflow-hidden z-50">
+        <ul className="absolute right-0 top-12 w-48 lg:w-36 bg-white border border-gray-200 rounded-lg shadow-md text-sm font-medium overflow-hidden z-50">
           {isLoggedIn && 
             <li>
               <Link
                 href="/profile/"
-                className="block px-4 py-3 hover:bg-gray-50 transition-colors"
+                className="block px-4 py-3 lg:py-[8px] hover:bg-gray-50 transition-colors"
               >
                 Profile
               </Link>
@@ -55,14 +55,14 @@ const surnameInitial = fullName.split(" ")[1]?.charAt(0).toUpperCase() || "";
             ? 
             <button
               onClick={logoutFunction}
-              className="px-4 py-3 text-red-600 hover:bg-red-50 transition-colors"
+              className="px-4 py-3 lg:py-[8px] text-red-600 hover:bg-red-50 transition-colors"
             >
               Log Out
             </button>
             : 
             <Link
               href="/auth/login"
-              className="block px-4 py-3 text-green-600 hover:bg-red-50 transition-colors"
+              className="block px-4 py-3 lg:py-[8px] text-green-600 hover:bg-red-50 transition-colors"
             >
               Log In
             </Link>}

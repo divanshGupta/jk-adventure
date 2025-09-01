@@ -20,7 +20,7 @@ const services = [
   },
   {
     title: "Bike Rentals",
-    subTitle: "Explore on two wheels, starting ₹500/day",
+    subTitle: "Starting ₹500/day",
     icon: <FaMotorcycle size={28} />,
     mobileIcon: <FaMotorcycle size={24} />,
     route: "/bikes/",
@@ -39,7 +39,7 @@ export default function HeroSection() {
   const router = useRouter();
 
   return (
-    <section className=" relative w-full min-h-screen flex items-center justify-center bg-center bg-cover">
+    <section className="relative w-full min-h-screen flex items-center justify-center bg-center bg-cover">
       {/* Optimized Background Image */}
       <Image
         src="/images/hero/kashmir-bhadarva-2.webp" // Prefer WebP for performance
@@ -55,33 +55,33 @@ export default function HeroSection() {
       <div className="absolute bottom-0 left-0 w-full h-[150px] bg-gradient-to-t from-black via-transparent to-transparent" />
       </div>
       {/* Content */}
-      <div className="relative z-10 max-w-6xl px-4 pt-20">
+      <div className="relative z-10 max-w-6xl px-4 pt-12 lg:pt-22">
         {/* Desktop Intro Text */}
-        <div className='mb-10'>
-          <div className="w-full text-center mb-6 text-[#FAFAFA]
+        <div className=''>
+          <div className="w-full text-center mb-4 lg:mb-2 text-[#FAFAFA]
           flex flex-col md:gap-4">
-            <h1 className='text-4xl leading-relaxed md:text-5xl font-semibold'>Explore</h1>
-            <h1 className='text-4xl leading-relaxed md:text-7xl font-bold tracking-wider'>Jammu & Kashmir</h1>
-            <h1 className='text-4xl leading-relaxed md:text-5xl font-semibold'>With Ease</h1>
+            <h1 className='text-[30px] lg:text-3xl leading-relaxed md:text-5xl font-semibold'>Explore</h1>
+            <h1 className='text-[36px] lg:text-[70px] leading-relaxed md:text-7xl font-bold tracking-wider'>Jammu & Kashmir</h1>
+            <h1 className='text-[30px] lg:text-3xl leading-relaxed md:text-5xl font-semibold'>With Ease</h1>
           </div>
           <div>
-            <p className="text-center text-lg font-medium text-gray-200">
+            <p className="text-center text-[16px] lg:text-[20px] font-medium text-gray-200">
               Trusted local rides, adventures, and more — one click away.
             </p>
           </div>
         </div>
 
         {/* Menu Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:mt-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 md:mt-16 lg:mt-8">
           {services.map((service, idx) => (
             <Link href={service.route} key={idx}>
-              <div key={idx} className='md:min-h-48 bg-[#003546] text-[#FAFAFA] backdrop-blur-md overflow-hidden rounded-xl shadow-md'>
+              <div key={idx} className='md:min-h-48 lg:min-h-24 bg-[#003546] text-[#FAFAFA] backdrop-blur-md overflow-hidden rounded-xl shadow-md'>
                 <div
-                  className="w-full h-full md:min-h-48 shadow-md p-4 md:py-10 flex flex-col items-center justify-between text-center hover:scale-105 transition duration-200 cursor-pointer"
+                  className="w-full h-full md:min-h-48 lg:w-40 lg:min-h-24 shadow-md p-4 md:py-10 lg:py-4 flex flex-col items-center justify-between text-center hover:scale-105 transition duration-200 cursor-pointer"
                 >
                   <div className="mb-2">{service.icon}</div>
-                  <p className="text-sm md:text-xl text-center font-semibold mb-4">{service.title}</p>
-                  <p className='hidden md:block text-sm font-normal'>{service.subTitle}</p>
+                  <p className="text-xs md:text-xl lg:text-[16px] text-center font-semibold mb-2">{service.title}</p>
+                  <p className='hidden md:block text-sm lg:text-[12px] font-normal'>{service.subTitle}</p>
                 </div>
               </div>
             </Link>

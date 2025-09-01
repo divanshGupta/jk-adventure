@@ -18,15 +18,15 @@ const team = [
 export default function AboutSection() {
 
   return (
-    <section className="w-full bg-gray-50">
+    <section className="bg-gray-50">
       <div className="">
         {/* Text Section */}
         <div className="flex flex-col">
          
           {/* content */}
-          <div className="relative w-full h-[60vh] md:h-[80vh] overflow-hidden">
+          <div className="relative h-[60vh] md:h-[80vh] overflow-hidden">
             <Image
-              src="/images/hero/kashmir-bhadarva-2.jpg"
+              src="/images/hero/kashmir-bhadarva-2.webp"
               alt="About Banner"
               className="object-cover w-full h-full"
               layout="fill"
@@ -69,10 +69,10 @@ export default function AboutSection() {
         </div>
 
         {/* Image Stack */}
-        <div className="px-40 flex flex-col items-center gap-6 md:justify-around md:flex-row mb-12">
+        <div className="w-screen px-6 flex flex-col items-center gap-6 md:justify-around md:flex-row mb-12">
           {team.map((member, idx) => (           
             <div key={idx} className="text-center">            
-              <div className="relative shadow-lg w-64 h-64 md:w-80 md:h-80 overflow-hidden rounded-lg">
+              <div className="relative shadow-lg w-48 h-48 md:w-80 md:h-80 overflow-hidden rounded-lg">
                 <Image 
                   src={member.image} 
                   alt={member.alt} 
