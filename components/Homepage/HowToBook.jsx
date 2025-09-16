@@ -33,7 +33,7 @@ const steps = [
 
 export default function HowToBook() {
   return (
-    <section className="bg-gray-50 text-white py-16 px-6 lg:px-20">
+    <section className="bg-[#A8DADC] text-white py-16 px-6 lg:px-20">
       <div className="max-w-6xl mx-auto text-center text-black">
         <h3 className="text-green-900 font-semibold mb-2">
           Start your unique journey

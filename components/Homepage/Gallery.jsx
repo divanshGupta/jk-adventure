@@ -1,7 +1,7 @@
 import Link from 'next/link';
-export default function KashmirIntro() {
+export default function Gallery() {
   return (
-    <section className="bg-white py-16 px-4 md:px-10">
+    <section className="bg-[#A8DADC] py-16 px-4 md:px-10">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-4">
           Experience the Enchantment of Jammu & Kashmir

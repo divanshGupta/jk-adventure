@@ -51,37 +51,33 @@ export default function HeroSection() {
       />
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/30 z-0">
+      <div className="absolute inset-0 bg-black/40 z-0">
       </div>
       {/* Content */}
       <div className="relative z-10 max-w-6xl px-4 pt-12 lg:pt-22">
         {/* Desktop Intro Text */}
         <div className=''>
-          <div className="w-full text-center mb-4 lg:mb-2 text-[#FAFAFA]
+          <div className="w-full text-center mb-4 lg:mb-2 text-[#FFF9EE]
           flex flex-col md:gap-4">
             <h1 className='text-[30px] lg:text-3xl leading-relaxed md:text-5xl font-semibold'>Explore</h1>
             <h1 className='text-[36px] lg:text-[70px] leading-relaxed md:text-7xl font-bold tracking-wider'>Jammu & Kashmir</h1>
             <h1 className='text-[30px] lg:text-3xl leading-relaxed md:text-5xl font-semibold'>With Ease</h1>
           </div>
           <div>
-            <p className="text-center text-[16px] lg:text-[20px] font-medium text-gray-200">
-              Trusted local rides, adventures, and more — one click away.
+            <p className="text-center text-[16px] lg:text-[20px] font-medium text-[#FFF9EE]">
+              Curated Adventures. Unforgettable Journeys. Your Gateway to the Himalayas.
             </p>
           </div>
         </div>
 
         {/* Menu Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 md:mt-16 lg:mt-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 md:mt-8 py-2 md:py-4 bg-white/40 rounded-lg">
           {services.map((service, idx) => (
             <Link href={service.route} key={idx}>
-              <div key={idx} className='md:min-h-48 lg:min-h-24 bg-[#003546] text-[#FAFAFA] backdrop-blur-md overflow-hidden rounded-xl shadow-md'>
-                <div
-                  className="w-full h-full md:min-h-48 lg:w-40 lg:min-h-24 shadow-md p-4 md:py-10 lg:py-4 flex flex-col items-center justify-between text-center hover:scale-105 transition duration-200 cursor-pointer"
-                >
-                  <div className="mb-2">{service.icon}</div>
-                  <p className="text-xs md:text-xl lg:text-[16px] text-center font-semibold mb-2">{service.title}</p>
-                  <p className='hidden md:block text-sm lg:text-[12px] font-normal'>{service.subTitle}</p>
-                </div>
+              <div key={idx} className='flex flex-col items-center justify-center text-[#FFF9EE] hover:scale-110'>    
+                  <span className="">{service.icon}</span>
+                  <span className="text-xs md:text-xl lg:text-[16px] text-center font-semibold ">{service.title}</span>
+                  {/* <p className='hidden md:block text-sm lg:text-[12px] font-normal'>{service.subTitle}</p> */}
               </div>
             </Link>
           ))}

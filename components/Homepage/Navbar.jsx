@@ -55,7 +55,7 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed top-0 left-0 transform z-50 transition-all duration-300
-              ${scrolled ? 'bg-white w-full md:px-12 shadow-lg' : 'w-full rounded-none'}`}>
+              ${scrolled ? 'bg-[#FFF9EE] text-[#4B5563] w-full md:px-12 shadow-lg' : 'text-[#FFF9EE] w-full rounded-none'}`}>
       <div className="w-full mx-auto">
         <div className="flex justify-between items-center py-4 px-6 md:px-20">
           {/* Logo */}
@@ -65,7 +65,7 @@ const Navbar = () => {
                 width={40}
                 height={40}
             /> */}
-            <span className="text-lg md:text-xl italic font-semibold bg-clip-text bg-yellow-300 text-black">
+            <span className="text-lg md:text-xl italic font-semibold bg-clip-text bg-yellow-300 ">
               JK Adventure
             </span>
           </Link>
@@ -75,7 +75,7 @@ const Navbar = () => {
             {desktopNavLinks.map((link) => (
               link.submenu ? (
                 <div key={link.name} className="relative group">
-                  <button className="text-charcoal hover:text-forest-green transition-colors  duration-300 text-sm flex items-center gap-1 group">
+                  <button className=" hover:text-forest-green transition-colors  duration-300 text-sm flex items-center gap-1 group">
                     <span>{link.name}</span>
                     <span className="relative w-4 h-4 flex items-center justify-center">
                       <ChevronDown className="absolute transition-opacity duration-200 group-hover:opacity-0" />
@@ -99,7 +99,7 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   href={link.path}
-                  className="text-charcoal hover:text-forest-green transition-colors duration-300 text-sm"
+                  className=" hover:text-forest-green transition-colors duration-300 text-sm"
                 >
                   {link.name}
                 </Link>
@@ -109,7 +109,7 @@ const Navbar = () => {
           </div>
 
           {/* profile button */}
-          <button className="hidden md:block" >
+          <button className="hidden md:block " >
               <ProfileDropdown logoutFunction={handleLogout} />
           </button>
 

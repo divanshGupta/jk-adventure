@@ -15,7 +15,7 @@ const footerLinks = [
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="bg-soft-beige text-charcoal pt-6 pb-4 md:pb-6 md:pt-12 px-6 md:px-12">
+    <footer className="bg-[#FFF9EE] text-[#4B5563] pt-6 pb-4 md:pb-6 md:pt-12 px-6 md:px-12">
       <div className="max-w-screen mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-6 md:mb-8">
         {/* Branding & Contact */}
         

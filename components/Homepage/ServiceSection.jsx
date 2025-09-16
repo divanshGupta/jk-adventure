@@ -7,17 +7,8 @@ const { tours } = allServices;
 const ServiceSection = ( { bgImage, title, description, ctaLink, ctaText }) => {
   return (
     <section
-      className="relative w-[100%] mx-auto min-h-screen flex items-center justify-center text-white shadow hover:shadow-xl transition"
+      className="bg-[#FFF9EE] relative w-[100%] mx-auto min-h-screen flex items-center justify-center text-[#4B5563] shadow hover:shadow-xl transition"
     >
-      <img
-        src={bgImage}
-        alt={title}
-        className="absolute inset-0 w-full h-full object-cover brightness-75"
-      />
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/30 z-0">
-      </div>
-
       <div className="flex flex-col md:flex-row gap-4 relative z-10 max-w-6xl px-4 md:px-6 py-6 lg:px-10">
 
         <div className='md:w-1/3'>

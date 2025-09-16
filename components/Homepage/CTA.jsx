@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function CTASection() {
   return (
-    <section className="bg-gray-800 text-white py-16 px-6 lg:px-20">
+    <section className="bg-[#A8DADC] text-[#4B5563] py-16 px-6 lg:px-20">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-16">
         {/* Left Side - Image + Text */}
         <div className="flex items-center gap-6 md:w-1/2">
@@ -18,7 +18,7 @@ export default function CTASection() {
           </div>
           <div>
             <h2 className="text-2xl font-bold mb-2">Ready to Explore More?</h2>
-            <p className="text-gray-300">
+            <p className="text-[#4B5563]">
               Our travel experts are ready to start creating your tailormade trip.
             </p>
           </div>

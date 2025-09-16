@@ -2,10 +2,10 @@ import Hero from '@/components/Homepage/Hero';
 import Reviews from '@/components/Homepage/Reviews';
 import React from 'react';
 import Head from 'next/head';
-import CTA from '@/components/ui/CTA';
+import CTA from '@/components/Homepage/CTA';
 import ServiceSection from '@/components/Homepage/ServiceSection';
 import CallButton from '@/components/ui/CallButton';
-import KashmirIntro from '@/components/Homepage/KashmirIntro';
+import KashmirIntro from '@/components/Homepage/Gallery';
 import HowToBook from '@/components/Homepage/HowToBook';
 
 <Head>

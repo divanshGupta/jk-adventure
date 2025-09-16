@@ -30,7 +30,7 @@ const reviews = [
 
 export default function Reviews() {
   return (
-    <section className="py-12 px-6 lg:px-20">
+    <section className="bg-[#FFF9EE] py-12 px-6 lg:px-20">
       <div className="max-w-6xl mx-auto text-center">
         <h3 className="text-teal-400 font-semibold mb-2">Our Happy Travellers</h3>
         <h2 className="text-3xl md:text-4xl font-bold mb-6">What People Say</h2>
