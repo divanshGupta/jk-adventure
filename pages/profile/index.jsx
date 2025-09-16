@@ -3,21 +3,29 @@ import { getSupabaseServerClient } from "@/lib/supabaseServer";
 import ProfileCard from "@/components/Profile/ProfileCard";
 import ProfileMenu from "@/components/Profile/ProfileMenu";
 
-export default function ProfileDashboard({ profile, isAdmin }) {
-  const adminMenu = [
+const MENUS = {
+  admin: [
     { label: "Personal Information", path: "/profile/info", type: "link" },
     { label: "Bookings List", path: "/admin/bookings", type: "link" },
     { label: "Users List", path: "/admin/users", type: "link" },
     { label: "Packages List", path: "/admin/packages", type: "link" },
     { label: "Media", path: "/admin/media", type: "link" },
     { label: "Logout", type: "action" },
-  ];
-
-  const userMenu = [
+  ],
+  user: [
     { label: "Personal Information", path: "/profile/info", type: "link" },
     { label: "Bookings List", path: "/bookings", type: "link" },
     { label: "Logout", type: "action" },
-  ];
+  ],
+};
+
+async function handleLogout() {
+  const { supabase } = await import("@/lib/supabaseClient");
+  await supabase.auth.signOut();
+  window.location.href = "/auth/login";
+}
+
+export default function ProfileDashboard({ profile, isAdmin }) {
 
   return (
     <div className="min-h-screen p-4 md:p-12">
@@ -25,13 +33,8 @@ export default function ProfileDashboard({ profile, isAdmin }) {
         <div className="max-w-5xl mx-auto">
           <ProfileCard userProfile={profile} />
           <ProfileMenu
-            menuItems={isAdmin ? adminMenu : userMenu}
-            logoutFunction={async () => {
-              // Dynamic import to avoid SSR touching the browser client
-              const { supabase } = await import("@/lib/supabaseClient");
-              await supabase.auth.signOut();
-              window.location.href = "/auth/login";
-            }}
+            menuItems={isAdmin ? MENUS.admin : MENUS.user}
+            logoutFunction={handleLogout}
           />
         </div>
       </div>
@@ -43,16 +46,8 @@ export default function ProfileDashboard({ profile, isAdmin }) {
 export async function getServerSideProps(ctx) {
   const supabase = getSupabaseServerClient(ctx);
 
-  const {
-    data: { user },
-    error: authError,
-  } = await supabase.auth.getUser();
-
-  if (authError || !user) {
-    return {
-      redirect: { destination: "/auth/login", permanent: false },
-    };
-  }
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (authError || !user) return redirectToLogin();
 
   const { data: profile, error: profileError } = await supabase
     .from("users")
@@ -60,11 +55,7 @@ export async function getServerSideProps(ctx) {
     .eq("id", user.id)
     .single();
 
-  if (profileError || !profile) {
-    return {
-      redirect: { destination: "/auth/login", permanent: false },
-    };
-  }
+  if (profileError || !profile) return redirectToLogin();
 
   return {
     props: {
@@ -73,3 +64,10 @@ export async function getServerSideProps(ctx) {
     },
   };
 }
+
+function redirectToLogin() {
+  return {
+    redirect: { destination: "/auth/login", permanent: false },
+  };
+}
+

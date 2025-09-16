@@ -1,4 +1,3 @@
-// components/CTASection.jsx
 import { Phone, Mail } from "lucide-react";
 import Image from "next/image";
 
@@ -10,7 +9,7 @@ export default function CTASection() {
         <div className="flex items-center gap-6 md:w-1/2">
           <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-gray-700 flex-shrink-0">
             <Image
-              src="/cta-person.jpg" // replace with your image
+              src="/images/bike1.jpg" // replace with your image
               alt="Travel Expert"
               width={112}
               height={112}
@@ -29,14 +28,14 @@ export default function CTASection() {
         <div className="flex flex-col sm:flex-row gap-6 md:w-1/2 justify-center">
           {/* Call Card */}
           <a
-            href="tel:+61280152809"
+            href="tel:+9419144037"
             className="flex flex-col items-center justify-center bg-gray-700 rounded-xl px-8 py-6 text-center shadow-md hover:shadow-teal-500/20 transition w-full sm:w-1/2"
           >
             <div className="bg-yellow-500 p-3 rounded-full mb-4">
               <Phone className="w-6 h-6 text-gray-900" />
             </div>
-            <h4 className="font-semibold mb-1">Talk to Our Experts</h4>
-            <p className="text-teal-400 font-medium">+91 94191 44037</p>
+            <h4 className="font-semibold mb-1">Talk to Our Experts</h4>   
+            <p className="text-teal-400 font-medium">+91 94191 44037</p>   
           </a>
 
           {/* Enquire Card */}
@@ -48,7 +47,7 @@ export default function CTASection() {
               <Mail className="w-6 h-6 text-gray-900" />
             </div>
             <h4 className="font-semibold mb-1">Enquire Now</h4>
-            <p className="text-teal-400 underline">Get in touch</p>
+            <button className="bg-forest-green text-white hover:bg-misty-blue px-6 py-2 rounded-full">Get in touch</button>
           </a>
         </div>
       </div>

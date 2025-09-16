@@ -3,7 +3,7 @@ import { CgProfile } from "react-icons/cg";
 import useUserProfile from '@/hooks/useUserProfile';
 import Link from 'next/link';
 
-const ProfileDropdown = ( { logoutFunction }) => {
+const ProfileDropdown = ({ logoutFunction }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef();
   const toggleDropdown = () => setIsOpen(!isOpen);

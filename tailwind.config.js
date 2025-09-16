@@ -15,10 +15,10 @@ module.exports = {
 		},
 		extend: {
 			colors: {
-				primary: '#1D3557',       // Deep blue
-				secondary: '#F4A261',     // Soft orange
-				accent: '#E76F51',        // Coral
-				background: '#F1FAEE',    // Soft white
+				'misty-blue': '#A3C6A0',
+				'forest-green': '#4B8B3B',
+				'soft-beige': '#F5F5DC',
+				'charcoal': '#333333',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

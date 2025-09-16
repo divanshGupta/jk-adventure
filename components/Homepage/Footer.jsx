@@ -2,43 +2,20 @@ import Link from "next/link";
 import { Facebook, Instagram, Youtube, Linkedin } from "lucide-react";
 
 const footerLinks = [
-  {
-    title: "Tour Packages",
-    path: '/tours',
-  },
-  {
-    title: "Adventures",
-    path: '/adventures',
-  },
-  {
-    title: "Taxi Services",
-    path: '/taxis',
-  },
-  {
-    title: "Bike Rental",
-    path: '/bikes',
-  },
-  {
-    title: "About Us",
-    path: '/about',
-  },
-  {
-    title: "Contact Us",
-    path: '/contact',
-  },
-  {
-    title: "Terms & Conditions",
-    path: '/about',
-  },
-  {
-    title: "Privacy Policy",
-    path: '/policy',
-  },
+  {title: "Tour Packages", path: '/tours'},
+  {title: "Adventures", path: '/adventures'},
+  {title: "Taxi Services", path: '/taxis'},
+  {title: "Bike Rental",  path: '/bikes'},
+  {title: "About Us", path: '/about'},
+  {title: "Contact Us", path: '/contact'},
+  {title: "Terms & Conditions", path: '/about'},
+  {title: "Privacy Policy", path: '/policy'},
 ];
 
 export default function Footer() {
+  const year = new Date().getFullYear();
   return (
-    <footer className="bg-gray-50 text-gray-800 pt-6 pb-4 md:pb-6 md:pt-12 px-6 md:px-12">
+    <footer className="bg-soft-beige text-charcoal pt-6 pb-4 md:pb-6 md:pt-12 px-6 md:px-12">
       <div className="max-w-screen mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-6 md:mb-8">
         {/* Branding & Contact */}
         
@@ -47,10 +24,10 @@ export default function Footer() {
           <p className="text-sm">Call us: +91 94191 44037</p>
           <p className="text-sm">Office: Bhadarva, Kashmir</p>
           <div className="flex space-x-4 mt-2">
-            <Link href="#"><Facebook className="w-5 h-5 hover:text-primary" /></Link>
-            <Link href="#"><Instagram className="w-5 h-5 hover:text-primary" /></Link>
-            <Link href="#"><Youtube className="w-5 h-5 hover:text-primary" /></Link>
-            <Link href="#"><Linkedin className="w-5 h-5 hover:text-primary" /></Link>
+            <Link href="#"><Facebook className="w-5 h-5 text-forest-green hover:text-misty-blue" /></Link>
+            <Link href="#"><Instagram className="w-5 h-5 text-forest-green hover:text-misty-blue" /></Link>
+            <Link href="#"><Youtube className="w-5 h-5 text-forest-green hover:text-misty-blue" /></Link>
+            <Link href="#"><Linkedin className="w-5 h-5 text-forest-green hover:text-misty-blue" /></Link>
           </div>
         </div>
 
@@ -58,8 +35,8 @@ export default function Footer() {
         <div className="md:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-4">
           {footerLinks.map((section) => (
             <Link href={section.path}
-            key={section.title}>
-              <h4 className=" text-sm mb-2">{section.title}</h4>
+            key={section.title}
+            className="hover:text-forest-green text-sm mb-2">{section.title}
             </Link>
           ))}
         </div>
@@ -67,7 +44,7 @@ export default function Footer() {
 
       <div className="text-center inset-0">
           <p className="text-[16px] md:text-[18px]">
-            © 2025 JK Adventure. All rights reserved.
+            © {year} JK Adventure. All rights reserved.
           </p>
       </div>
     </footer>

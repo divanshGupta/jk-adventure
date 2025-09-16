@@ -44,7 +44,7 @@ export default function Reviews() {
           {reviews.map((review) => (
             <div
               key={review.id}
-              className="bg-gray-800 rounded-2xl p-6 text-left shadow-lg hover:shadow-teal-500/20 transition"
+              className="bg-gray-600 rounded-2xl p-6 text-left shadow-lg hover:shadow-teal-500/20 transition"
             >
               {/* Rating */}
               <div className="flex gap-1 mb-4">
