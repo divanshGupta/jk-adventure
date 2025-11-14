@@ -25,3 +25,53 @@ CTA button: "Explore Tour Packages"
 Why it's better:
 More room for storytelling and visuals
 Engages visitors as they scroll
+
+1. Authentication & Authorization
+
+ Redirect unauthorized users on client-side (done ✅ but refine UX with nice error/403 page).
+
+ Use Supabase session (supabase.auth.getSession) in getServerSideProps for server-side protection.
+
+2. Database Security (Supabase RLS)
+
+ Enable Row Level Security (RLS) on users and booking-related tables.
+
+ Add policies:
+
+users table → Users can select/update only their own row.
+
+bookings table → Users can select/insert/update/delete only their own bookings.
+
+Admins (role = admin) → Full access.
+
+3. API Routes (if using Next.js API)
+
+ Create serverless API routes (e.g. /api/admin/*) for sensitive admin actions.
+
+ In those routes, verify session + role before performing DB queries.
+
+4. Data Validation & Input Handling
+
+ Validate booking forms on both client and server.
+
+ Sanitize all text inputs (avoid malicious scripts).
+
+5. Deployment & Secrets
+
+ Store Supabase service role key & other API keys in server-side env vars (.env.local), never in client code.
+
+ Configure production Supabase project to disallow anon key misuse (limit rate, enable RLS).
+
+6. Admin UX
+
+ Show 403 Unauthorized page when a non-admin tries to access admin pages.
+
+ Add audit logs (optional) — record important admin actions like deleting bookings.
+
+🔐 Bonus (Optional but Recommended)
+
+ Rate-limit booking submissions to prevent spam.
+
+ Add email verification step before first booking.
+
+ Enable HTTPS (handled automatically by Vercel/Netlify if deployed).

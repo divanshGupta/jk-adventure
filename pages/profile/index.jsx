@@ -9,7 +9,8 @@ const MENUS = {
     { label: "Bookings List", path: "/admin/bookings", type: "link" },
     { label: "Users List", path: "/admin/users", type: "link" },
     { label: "Packages List", path: "/admin/packages", type: "link" },
-    { label: "Media", path: "/admin/media", type: "link" },
+    { label: "Services", path: "/admin/services", type: "link" },
+    { label: "Packages", path: "/admin/packages", type: "link" },
     { label: "Logout", type: "action" },
   ],
   user: [
