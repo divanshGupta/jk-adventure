@@ -17,13 +17,11 @@ const ProfileDropdown = ({ logoutFunction }) => {
       }
       document.addEventListener("mousedown", handleClickOutside);
       return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+  }, []);
 
-    const firstLetter = user?.name.charAt(0).toUpperCase() || "";
-    const fullName = user?.name.trim() || "";
-const surnameInitial = fullName.split(" ")[1]?.charAt(0).toUpperCase() || "";
-
-
+  const firstLetter = user?.name.charAt(0).toUpperCase() || "";
+  const fullName = user?.name.trim() || "";
+  const surnameInitial = fullName.split(" ")[1]?.charAt(0).toUpperCase() || "";
 
   return (
     <div ref={menuRef} className="relative flex items-center gap-4">
