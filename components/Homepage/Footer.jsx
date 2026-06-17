@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Facebook, Instagram, Youtube, Compass } from "lucide-react";
+import { Facebook, Instagram, Youtube, Twitter, Compass, MapPin, Phone, Mail } from "lucide-react";
 
 const footerLinks = [
   {title: "Tour Packages", path: '/tours'},
